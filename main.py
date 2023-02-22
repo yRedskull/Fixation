@@ -878,7 +878,6 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                                                         sl(0.02)
                                                         break
                                                     except:
-                                                        print(num)
                                                         continue
                                             else:
                                                 os.rename(os.path.join(self.direc_padrao, _file),
@@ -891,7 +890,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                                             aceito = 1
                                             break
                                         except:
-                                            print(ValueError.mro())
+                                            continue
                                     else:
                                         break
                                 else:
@@ -913,7 +912,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                     return mb.showerror(message='Error!!!')
 
             except ValueError:
-                print(ValueError)
+                continue
 
         for _file in self.lista_arq[self.pasta]:
             for pos in range(len(_file) - 1, -1, -1):
@@ -1027,8 +1026,8 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                     else:
                         self.backup_cb_lista.remove(_folder)
                 if cont != 0:
-                    res = mb.askquestion(message=texto)
-                    return res
+                    question = mb.askquestion(message=texto)
+                    return question
                 else:
                     return ''
 
