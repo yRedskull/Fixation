@@ -877,7 +877,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                                                             f'{_file[:pos]} ({num}){_file[pos:]}')
                                                         sl(0.02)
                                                         break
-                                                    except:
+                                                    except ValueError:
                                                         continue
                                             else:
                                                 os.rename(os.path.join(self.direc_padrao, _file),
@@ -889,7 +889,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                                                 sl(0.02)
                                             aceito = 1
                                             break
-                                        except:
+                                        except ValueError:
                                             continue
                                     else:
                                         break
@@ -915,37 +915,55 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                 continue
 
         for _file in self.lista_arq[self.pasta]:
+            cont = 0
             for pos in range(len(_file) - 1, -1, -1):
-                if '.' in _file[pos]:
-                    if os.path.exists(os.path.join(self.direc_padrao, self.outros_arquivos, _file)
-                                      ) and self.lista_arq[self.outros_arquivos].count(_file) != 0:
-                        for num in range(1, 100):
-                            try:
-                                os.rename(os.path.join(self.direc_padrao, _file),
-                                          os.path.join(self.direc_padrao,
-                                                       self.outros_arquivos,
-                                                       f'{_file[:pos]} ({num}){_file[pos:]}'))
-                                self.list_box_1.insert(END,
-                                                       f'"{_file}" foi movido para a pasta "{self.outros_arquivos}" renomeado para')
-                                self.app.update()
-                                self.list_box_1.insert(END,
-                                                       f'"{_file[:pos]} ({num}){_file[pos:]}".')
-                                self.app.update()
-                                self.reverse_org[self.outros_arquivos].append(
-                                    f'{_file[:pos]} ({num}){_file[pos:]}')
-                                sl(0.02)
-                                break
+                if cont == 0:
+                    if '.' in _file[pos]:
+                        if os.path.exists(os.path.join(self.direc_padrao, self.outros_arquivos, _file)
+                                          ) and self.lista_arq[self.outros_arquivos].count(_file) != 0:
+                            for num in range(1, 100):
+                                try:
+                                    os.rename(os.path.join(self.direc_padrao, _file),
+                                              os.path.join(self.direc_padrao,
+                                                           self.outros_arquivos,
+                                                           f'{_file[:pos]} ({num}){_file[pos:]}'))
+                                    self.list_box_1.insert(END,
+                                                           f'"{_file}" foi movido para a pasta "{self.outros_arquivos}" renomeado para')
+                                    self.app.update()
+                                    self.list_box_1.insert(END,
+                                                           f'"{_file[:pos]} ({num}){_file[pos:]}".')
+                                    self.app.update()
+                                    self.reverse_org[self.outros_arquivos].append(
+                                        f'{_file[:pos]} ({num}){_file[pos:]}')
+                                    sl(0.02)
+                                    cont = 1
+                                    break
 
-                            except ValueError:
-                                print(num)
-                                continue
+                                except ValueError:
+                                    print(num)
+                                    continue
+                        else:
+                            os.rename(os.path.join(self.direc_padrao, _file),
+                                      os.path.join(self.direc_padrao, self.outros_arquivos, _file))
+                            self.list_box_1.insert(END, f'"{_file}" foi movido para a pasta "{self.outros_arquivos}".')
+                            self.app.update()
+                            self.reverse_org[self.outros_arquivos].append(_file)
+                            sl(0.02)
+                            cont = 1
                     else:
-                        os.rename(os.path.join(self.direc_padrao, _file),
-                                  os.path.join(self.direc_padrao, self.outros_arquivos, _file))
-                        self.list_box_1.insert(END, f'"{_file}" foi movido para a pasta "{self.outros_arquivos}".')
-                        self.app.update()
-                        self.reverse_org[self.outros_arquivos].append(_file)
-                        sl(0.02)
+                        continue
+                else:
+                    break
+
+            if cont == 0:
+                os.rename(os.path.join(self.direc_padrao, _file),
+                          os.path.join(self.direc_padrao, self.outros_arquivos, _file))
+                self.list_box_1.insert(END, f'"{_file}" foi movido para a pasta "{self.outros_arquivos}".')
+                self.app.update()
+                self.reverse_org[self.outros_arquivos].append(_file)
+                sl(0.02)
+            else:
+                continue
 
         if len(self.backup_cb_formats) != 0:
             for folder in self.backup_cb_lista:
