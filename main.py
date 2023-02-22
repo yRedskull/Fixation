@@ -877,7 +877,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                                                             f'{_file[:pos]} ({num}){_file[pos:]}')
                                                         sl(0.02)
                                                         break
-                                                    except ValueError:
+                                                    except:
                                                         continue
                                             else:
                                                 os.rename(os.path.join(self.direc_padrao, _file),
@@ -889,7 +889,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                                                 sl(0.02)
                                             aceito = 1
                                             break
-                                        except ValueError:
+                                        except:
                                             continue
                                     else:
                                         break
@@ -911,7 +911,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                 else:
                     return mb.showerror(message='Error!!!')
 
-            except ValueError:
+            except:
                 continue
 
         for _file in self.lista_arq[self.pasta]:
