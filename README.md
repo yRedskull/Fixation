@@ -8,7 +8,7 @@
 
 ## **Instruções:**
 
-### **1. Instale `Python` na sua máquina, por meio [deste link](https://www.python.org/)**
+### **1. Instale 🐍`Python` na sua máquina, por meio [deste link](https://www.python.org/)**
 
 ### **2. Faça um clone [desse repositório](https://github.com/yRedskull/Fixation.git) na sua máquina:**
 
@@ -22,5 +22,5 @@
 * Selecione a opção `Clone repository...` e vá na aba `URL`<br>
 * Cole o repositório, indique a pasta onde ele deverá aparecer e clique em `Clone`<br>
 
-### **3. Execute o arquivo `main.py` e siga as instruções nele<br>**
+### **3. Execute o arquivo 🦈`main.py` e siga as instruções nele<br>**
 
