@@ -1080,4 +1080,5 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
 
 
 # Home
-Start()
+if __name__ == '__main__':
+    Start()
