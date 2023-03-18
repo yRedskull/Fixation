@@ -7,6 +7,7 @@ from tkinter.filedialog import askdirectory as directory_
 from tkinter.ttk import Combobox
 from tkinter import messagebox as mb
 from time import sleep as sl
+import json
 
 
 # Def/Class
@@ -53,8 +54,15 @@ class Start:
         self.app.resizable(False, False)
 
         # Config
+        try: 
+            with open("version.json", "r") as vj:
+                arquivo_json = vj.read()
+            version = json.loads(arquivo_json)
+        except Exception:
+            version = {"version": ''}
+
         self.app.iconphoto(False, self.img_logo)
-        self.app.title("Fixation")
+        self.app.title(f"Fixation {version['version']}")
         self.app.configure(background="#222")
 
         # Var
