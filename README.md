@@ -24,5 +24,8 @@
 * Selecione a opção `Clone repository...` e vá na aba `URL`<br>
 * Cole o repositório, indique a pasta onde ele deverá aparecer e clique em `Clone`<br>
 
-### **3. Execute o arquivo 🦈`main.py` e siga as instruções nele<br>**
+### **3. Execução 🦈**
+* **Entre na pasta onde o repositório foi clonado**
+* Execute o arquivo `main.py` com dois cliques
+* Siga as intruções nele
 
