@@ -1,5 +1,6 @@
 # Import
 from tkinter import *
+import webbrowser as browser
 import os
 import sys
 from tkinter.filedialog import askdirectory as directory_
@@ -41,6 +42,7 @@ class Start:
         self.img_logo = PhotoImage(file="Image/logo.png", master=self.app)
         self.img_minus = PhotoImage(file="Image/minus.png").subsample(2)
         self.img_plus = PhotoImage(file='Image/plus.png').subsample(2)
+        self.img_github = PhotoImage(file='Image/github.png').subsample(1)
 
         # Resolution
         self.width_screen = self.app.winfo_screenwidth()
@@ -77,6 +79,7 @@ class Start:
         self.btn_3 = None
         self.btn_4 = None
         self.btn_5 = None
+        self.btn_github = None
         self.direc = None
         self.run = None
         self.sistema = sys.platform
@@ -119,15 +122,11 @@ class Start:
         # Itens do Quadro
         self.label_1 = Label(self.frame_1, text=f'''Olá {self.nome}, seja bem vindo ao Fixation!
 Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=fts)
-        self.label_1.pack(ipadx=1, ipady=1, padx=1, pady=1, side="top")
+        self.label_1.pack(ipadx=1, ipady=1, padx=1, pady=3, side="top")
 
         self.label_2 = Label(self.frame_1, text=self.obs,
                              anchor="center", bg=bag, fg=fog, font=("Arial", 12))
         self.label_2.pack(ipadx=1, ipady=1, padx=1, pady=1, side="bottom")
-
-        self.btn_1 = Button(self.frame_1, image=self.img_start, command=self.escolher_pasta, highlightthickness=0, bd=0,
-                            bg=bag)
-        self.btn_1.pack(ipadx=0, ipady=0, padx=10, pady=10)
 
         def configbgcolor(event):
             self.btn_1.config(bg="#222")
@@ -137,11 +136,30 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
             self.btn_1.config(bg=bag)
             return event
 
+        self.btn_1 = Button(self.frame_1, image=self.img_start, command=self.escolher_pasta, highlightthickness=0, bd=0,
+                            bg=bag)
+        self.btn_1.pack(ipadx=0, ipady=0, padx=10, pady=50)
         self.btn_1.bind("<Enter>", configbgcolor)
         self.btn_1.bind("<Leave>", configbgbag)
 
+        def configbgcolor(event):
+            self.btn_github.config(bg="#222")
+            return event
+
+        def configbgbag(event):
+            self.btn_github.config(bg=bag)
+            return event
+    
+        self.btn_github = Button(self.app, image=self.img_github,  command=lambda: browser.open('https://github.com/yRedskull/Fixation'), bg="#222", fg=fog, bd=0, highlightthickness=0)
+        self.btn_github.pack(ipadx=0, ipady=0, padx=1, pady=1, side='bottom')
+        self.btn_github.bind('<Enter>', configbgbag)
+        self.btn_github.bind('<Leave>', configbgcolor)
+
+        self.app.update()
+
     def escolher_pasta(self, bag=back_gr, fog=fore_gr, fts=font_si):
         self.frame_1.destroy()
+        self.btn_github.destroy()
 
         # Quadro
         self.frame_1 = Frame(self.app, borderwidth=2, relief="solid")
@@ -209,13 +227,28 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
         self.run.bind("<Enter>", configbgcolor)
         self.run.bind("<Leave>", configbgbag)
 
+        def configbgcolor(event):
+            self.btn_github.config(bg="#222")
+            return event
+
+        def configbgbag(event):
+            self.btn_github.config(bg=bag)
+            return event
+    
+        self.btn_github = Button(self.app, image=self.img_github, command=lambda: browser.open('https://github.com/yRedskull/Fixation'), font=fts, bg="#222", fg=fog, bd=0, highlightthickness=0)
+        self.btn_github.pack(ipadx=0, ipady=0, padx=1, pady=1, side='bottom')
+        self.btn_github.bind('<Enter>', configbgbag)
+        self.btn_github.bind('<Leave>', configbgcolor)
+
+        self.app.update()
+
     def adicionar_pastas(self, bag=back_gr, fog=fore_gr, fts=font_si):
         if self.direc_padrao == '':
             return mb.showinfo(icon='warning', message='Selecione o diretório antes de continuar!')
 
         self.frame_1.destroy()
         self.frame_2.destroy()
-        # Var
+        self.btn_github.destroy()
 
         # Quadro
         self.frame_1 = Frame(self.app, borderwidth=2, relief="solid")
@@ -342,6 +375,21 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
         self.run.bind("<Enter>", configbgcolor)
         self.run.bind("<Leave>", configbgbag)
 
+        def configbgcolor(event):
+            self.btn_github.config(bg="#222")
+            return event
+
+        def configbgbag(event):
+            self.btn_github.config(bg=bag)
+            return event
+    
+        self.btn_github = Button(self.app, image=self.img_github, command=lambda: browser.open('https://github.com/yRedskull/Fixation'), font=fts, bg="#222", fg=fog, bd=0, highlightthickness=0)
+        self.btn_github.pack(ipadx=0, ipady=0, padx=1, pady=1, side='bottom')
+        self.btn_github.bind('<Enter>', configbgbag)
+        self.btn_github.bind('<Leave>', configbgcolor)
+
+        self.app.update()
+
     def selecionar_formatos(self, bag=back_gr, fog=fore_gr, fts=font_si):
         if len(self.cb_1_lista) < 7:
             return mb.showwarning(title='Atenção', message="Mínimo de pastas não atingido!!! ")
@@ -351,6 +399,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
             self.backup_cb_lista = [c for c in self.cb_1_lista]
             self.frame_1.destroy()
             self.frame_2.destroy()
+            self.btn_github.destroy()
 
             # Quadro
             self.frame_1 = Frame(self.app, borderwidth=2, relief="solid")
@@ -469,6 +518,8 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
             self.btn_5.bind("<Enter>", configbgcolor)
             self.btn_5.bind("<Leave>", configbgbag)
 
+            self.app.update()
+
     def inicio_organizacao(self, bag=back_gr):
         if len(self.list_formats) != 0 and len(self.cb_1_lista) != 0:
             if len(self.list_formats) != 1 and len(self.cb_1_lista) != 1:
@@ -510,6 +561,8 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
             self.btn_1.bind("<Enter>", configbgcolor)
             self.btn_1.bind("<Leave>", configbgbag)
 
+            self.app.update()
+
             mb.showinfo(message='As alterações a seguir poderão ser desfeitas caso deseje.')
             # Pegando apenas o nome do diretório
             for carac in range(len(self.direc_padrao) - 1, -1, -1):
@@ -543,7 +596,12 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                 self.list_box_1.insert(END, 'Iniciando a organização...')
                 self.app.update()
                 sl(0.2)
-                self.exec_organizar()
+                if not len(self.backup_cb_lista) == 0:
+                    self.exec_organizar()
+                else:
+                    self.list_box_1.insert(END, '[ERRO] Não existe pasta para iniciar a movimentação de arquivos!')
+                    self.list_box_1.configure(fg="#d00")
+                    self.app.update()
 
     # Funções das telas
     def texto_criar_pastas(self):
@@ -723,11 +781,13 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
         self.list_formats = list()
         self.texto_1 = "Pastas: 0"
         self.texto_2 = "Faltam 7 formatos."
+        self.btn_github.destroy()
         self.inicio()
 
     def voltar_escolher_pasta(self):
         self.frame_1.destroy()
         self.frame_2.destroy()
+        self.btn_github.destroy()
         self.escolher_pasta()
 
     def voltar_adicionar_pastas(self):
@@ -736,14 +796,8 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
         self.cb_1_lista = [c for c in self.backup_cb_lista]
         self.texto_2 = "Faltam 7 itens."
         self.remove_list_box = list()
+        self.btn_github.destroy()
         self.adicionar_pastas()
-
-    def voltar_selecionar_formatos(self):
-        self.frame_1.destroy()
-        self.frame_2.destroy()
-        self.cb_1_lista = [c for c in self.backup_cb_lista]
-        self.list_formats = [c for c in self.backup_cb_formats]
-        self.selecionar_formatos()
 
     # Mostrar formatos que faltam ser anexados
     def _formats_showdown(self):
@@ -788,10 +842,14 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
         if folder_exists:
             # Criando uma lista com os arquivos dentro do diretório escolhido
             self.lista_arq[str(self.pasta)] = os.listdir(self.direc_padrao)
-            for folder in self.backup_cb_lista:
+            lista_folders = [c for c in self.backup_cb_lista]
+            for folder in lista_folders:
                 folder_exists = os.path.exists(os.path.join(self.direc_padrao, folder))
                 if not folder_exists:
-                    os.mkdir(os.path.join(self.direc_padrao, folder))
+                    try:
+                        os.mkdir(os.path.join(self.direc_padrao, folder))
+                    except Exception:
+                        self.list_box_1.insert(END, f'[ERRO] Não foi possível criar a pasta "{folder}"')
                 else:
                     res = mb.askquestion(
                         icon='warning', message=f'A pasta [{folder}] ja existe, deseja utiliza-la mesmo assim?')
@@ -807,14 +865,14 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                 self.app.update()
             else:
                 self.list_box_1.configure(fg="#d00")
-                self.list_box_1.insert(END, 'Error!!!')
+                self.list_box_1.insert(END, '[ERRO]')
                 sl(1)
                 mb.showwarning(message='Nenhuma pasta encontrada ou aceita para mover os arquivos.')
                 mb.showinfo(message='Voltando a tela inicial...')
                 self.voltar_inicio()
         else:
             self.list_box_1.configure(fg="#d00")
-            self.list_box_1.insert(END, 'Error!!!')
+            self.list_box_1.insert(END, '[ERRO]')
             sl(1)
             mb.showerror(title='Atenção', message='Diretório inexistente!!!')
             mb.showinfo(message='Voltando a tela inicial...')
@@ -880,13 +938,17 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                                                     except:
                                                         continue
                                             else:
-                                                os.rename(os.path.join(self.direc_padrao, _file),
-                                                          os.path.join(self.direc_padrao, key, _file))
-                                                self.list_box_1.insert(END,
-                                                                       f'"{_file}" foi movido para a pasta "{key}".')
-                                                self.app.update()
-                                                self.reverse_org[key].append(_file)
-                                                sl(0.02)
+                                                try:
+                                                    os.rename(os.path.join(self.direc_padrao, _file),
+                                                            os.path.join(self.direc_padrao, key, _file))
+                                                    self.list_box_1.insert(END,
+                                                                        f'"{_file}" foi movido para a pasta "{key}".')
+                                                    self.app.update()
+                                                    self.reverse_org[key].append(_file)
+                                                    sl(0.02)
+                                                except Exception:
+                                                    self.list_box_1.insert(END, f'[ERRO] Não foi possível mover o arquivo "{_file}" para a pasta "{key}".')
+                                                    continue
                                             aceito = 1
                                             break
                                         except:
@@ -909,7 +971,8 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                 elif self.lista_arq[self.pasta].count(str(self.remove_list_box[pos][0]).capitalize()) == 1:
                     self.lista_arq[self.pasta].remove(str(self.remove_list_box[pos][0]).capitalize())
                 else:
-                    return mb.showerror(message='Error!!!')
+                    mb.showerror(message='[ERRO]')
+                    self.voltar_inicio()
 
             except:
                 continue
@@ -939,29 +1002,36 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                                     cont = 1
                                     break
 
-                                except ValueError:
-                                    print(num)
+                                except Exception:
                                     continue
                         else:
-                            os.rename(os.path.join(self.direc_padrao, _file),
-                                      os.path.join(self.direc_padrao, self.outros_arquivos, _file))
-                            self.list_box_1.insert(END, f'"{_file}" foi movido para a pasta "{self.outros_arquivos}".')
-                            self.app.update()
-                            self.reverse_org[self.outros_arquivos].append(_file)
-                            sl(0.02)
-                            cont = 1
+                            try:
+                                os.rename(os.path.join(self.direc_padrao, _file),
+                                        os.path.join(self.direc_padrao, self.outros_arquivos, _file))
+                                self.list_box_1.insert(END, f'"{_file}" foi movido para a pasta "{self.outros_arquivos}".')
+                                self.app.update()
+                                self.reverse_org[self.outros_arquivos].append(_file)
+                                sl(0.02)
+                                cont = 1
+                            except Exception:
+                                self.list_box_1.insert(END, f'[ERRO] Não foi possível mover o arquivo "{_file}" para a pasta "{self.outros_arquivos}".')
+                                continue
                     else:
                         continue
                 else:
                     break
-
+            
             if cont == 0:
-                os.rename(os.path.join(self.direc_padrao, _file),
-                          os.path.join(self.direc_padrao, self.outros_arquivos, _file))
-                self.list_box_1.insert(END, f'"{_file}" foi movido para a pasta "{self.outros_arquivos}".')
-                self.app.update()
-                self.reverse_org[self.outros_arquivos].append(_file)
-                sl(0.02)
+                try:
+                    os.rename(os.path.join(self.direc_padrao, _file),
+                            os.path.join(self.direc_padrao, self.outros_arquivos, _file))
+                    self.list_box_1.insert(END, f'"{_file}" foi movido para a pasta "{self.outros_arquivos}".')
+                    self.app.update()
+                    self.reverse_org[self.outros_arquivos].append(_file)
+                    sl(0.02)
+                except Exception:
+                    self.list_box_1.insert(END, f'[ERRO] Não foi possível mover o arquivo "{_file}" para a pasta "{self.outros_arquivos}".')
+                    continue
             else:
                 continue
 
@@ -972,7 +1042,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
             self.app.update()
         else:
             self.list_box_1.configure(fg="#d00")
-            self.list_box_1.insert(END, 'Error!!!')
+            self.list_box_1.insert(END, '[ERRO]')
             sl(1)
             mb.showwarning(message='Nenhuma pasta encontrada ou aceita para mover os arquivos.')
             mb.showinfo(message='Voltando a tela inicial...')
@@ -1010,12 +1080,15 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                         if self.lista_arq[self.pasta].count(_file) != 0:
                             for pos in range(len(_file) - 1, -1, -1):
                                 if '.' in _file[pos]:
-                                    os.rename(os.path.join(self.direc_padrao, key, _file), os.path.join(
-                                        self.direc_padrao,
-                                        f'{_file[:pos]} ({self.lista_arq[key].count(_file)}){_file[pos:]}'))
-                                    self.list_box_1.insert(END, f'"{_file}" retornou a pasta "{self.pasta}".')
-                                    self.app.update()
-                                    sl(0.02)
+                                    try:
+                                        os.rename(os.path.join(self.direc_padrao, key, _file), os.path.join(
+                                            self.direc_padrao,
+                                            f'{_file[:pos]} ({self.lista_arq[key].count(_file)}){_file[pos:]}'))
+                                        self.list_box_1.insert(END, f'"{_file}" retornou a pasta "{self.pasta}".')
+                                        self.app.update()
+                                        sl(0.02)
+                                    except Exception:
+                                        self.list_box_1.insert(END, f'[ERRO] Não foi possível retornar o arquivo "{_file}" para a pasta "{self.pasta}".')
                         else:
                             os.rename(os.path.join(self.direc_padrao, key, _file),
                                       os.path.join(self.direc_padrao, _file))
@@ -1070,7 +1143,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                     self.list_box_1.insert(END, '-')
                     self.app.update()
                     sl(0.1)
-                self.list_box_1.insert(END, 'Error!!!')
+                self.list_box_1.insert(END, '[ERRO]')
                 self.app.update()
                 sl(0.5)
                 self.list_box_1.insert(END, 'Nenhum item identificado para ser movido!')
