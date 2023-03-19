@@ -29,3 +29,4 @@
 * Execute o arquivo `main.py` com dois cliques
 * Siga as intruções nele
 
+### **Em breve lançarei uma versão mais compacta...**
