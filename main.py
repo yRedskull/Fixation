@@ -578,7 +578,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                     self.pasta = self.direc_padrao[carac + 1:]
                     break
             # Question
-            self.iniciar = mb.askquestion(title='Atenção', message=f'Iniciar a organização na pasta {self.pasta}?',
+            self.iniciar = mb.askquestion(title='Atenção', message=f'Iniciar a organização na pasta "{self.pasta}"?',
                                           icon='question')
             if self.iniciar == 'no':
                 mb.showinfo(message='Voltando a tela inicial...')
@@ -836,6 +836,32 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
             self.direc_padrao = direc_padrao_verify
             self.direc_show.config(text=self.direc_padrao)
         return self.direc_padrao
+    
+    def text_message(self):
+                cont = 0
+                texto = 'Deseja apagar as pastas "'
+                lista_folders = list(self.backup_cb_lista)
+                for _folder in lista_folders:
+                    try:
+                        self.lista_arq[_folder] = os.listdir(os.path.join(self.direc_padrao, _folder))
+                    except Exception:
+                        continue
+                    if len(self.lista_arq[_folder]) == 0:
+                        cont += 1
+                        if not self.backup_cb_lista[len(self.backup_cb_lista) - 1] == _folder:
+                            texto += _folder + ', '
+                        else:
+                            texto += _folder + '" que não contém arquivos?'
+                    else:
+                        continue
+                if cont != 0:
+                    teste_texto = texto.strip()
+                    if teste_texto[-1] == ',':
+                        texto.replace(teste_texto[-1], '" que não contém arquivos?')
+                    question = mb.askquestion(message=texto)
+                    return question
+                else:
+                    return ''
 
     # Exec Back-End
     def exec_criar_pastas(self):
@@ -850,7 +876,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
         if folder_exists:
             # Criando uma lista com os arquivos dentro do diretório escolhido
             self.lista_arq[str(self.pasta)] = os.listdir(self.direc_padrao)
-            lista_folders = [c for c in self.backup_cb_lista]
+            lista_folders = list(self.backup_cb_lista)
             for folder in lista_folders:
                 folder_exists = os.path.exists(os.path.join(self.direc_padrao, folder))
                 if not folder_exists:
@@ -862,14 +888,14 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                     res = mb.askquestion(
                         icon='warning', message=f'A pasta [{folder}] ja existe, deseja utiliza-la mesmo assim?')
                     if res == 'no':
+                        self.formats.pop(folder)
                         self.backup_cb_lista.remove(folder)
                     else:
                         continue
+
             # Dicionário onde irá alojar todos os arquivos das pastas, caso elas existam.
-            if len(self.backup_cb_formats) != 0:
-                for folder in self.backup_cb_lista:
-                    self.lista_arq[folder] = os.listdir(os.path.join(self.direc_padrao, folder))
-                self.list_box_1.insert(END, 'Completado com êxito!')
+            if len(self.backup_cb_lista) != 0:
+                self.list_box_1.insert(END, 'Êxito!')
                 self.app.update()
             else:
                 self.list_box_1.configure(fg="#d00")
@@ -902,117 +928,135 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
         # Colocando as pastas do usuário dentro de um dicionario para que seja possível reverter
         for folder in self.backup_cb_lista:
             self.reverse_org[folder] = []
-
-        # Passando por todos os arquivos do diretório escolhido
-        for _file in self.lista_arq[self.pasta]:
-            # Validação se o arquivo é compátivel com o formato *.?
-            aceito = 0
-            for key in self.formats:
-                if aceito == 1:
-                    break
-                else:
-                    # Passando por cada formato
-                    for m_format in self.formats[key]:
-                        if aceito == 1:
-                            break
-                        elif m_format in 'Pastas e outros':
-                            continue
-                        else:
-                            # Encontrando o último ponto no arquivo selecionado do diretório
-                            for pos in range(len(_file) - 1, -1, -1):
-                                if '.' in _file[pos]:
-                                    # Verificação para ver se depois do ponto é igual ao formato
-                                    if _file[pos:] in m_format:
-                                        # Movimentando o arquivo
-                                        try:
-                                            # Caso a pasta exista e ter o mesmo nome de arquivo nela
-                                            if os.path.exists(os.path.join(self.direc_padrao, key, _file)) and \
-                                                    self.lista_arq[key].count(_file) != 0:
-                                                for num in range(1, 100):
+        if len(self.lista_arq[self.pasta]) != 0:
+            # Passando por todos os arquivos do diretório escolhido
+            for _file in self.lista_arq[self.pasta]:
+                # Validação se o arquivo é compátivel com o formato *.?
+                aceito = 0
+                for key in self.formats:
+                    if aceito == 1:
+                        break
+                    else:
+                        # Passando por cada formato
+                        for m_format in self.formats[key]:
+                            if aceito == 1:
+                                break
+                            elif m_format in 'Pastas e outros':
+                                continue
+                            else:
+                                # Encontrando o último ponto no arquivo selecionado do diretório
+                                for pos in range(len(_file) - 1, -1, -1):
+                                    if '.' in _file[pos]:
+                                        # Verificação para ver se depois do ponto é igual ao formato
+                                        if _file[pos:] in m_format:
+                                            # Movimentando o arquivo
+                                            try:
+                                                # Caso a pasta exista e ter o mesmo nome de arquivo nela
+                                                if os.path.exists(os.path.join(self.direc_padrao, key, _file)) and \
+                                                        self.lista_arq[key].count(_file) != 0:
+                                                    for num in range(1, 100):
+                                                        try:
+                                                            os.rename(os.path.join(self.direc_padrao, _file),
+                                                                    os.path.join(self.direc_padrao, key,
+                                                                                f'{_file[:pos]} ({num}){_file[pos:]}'))
+                                                            self.list_box_1.insert(END,
+                                                                                f'"{_file}" foi movido para a pasta "{key}" e renomeado...')
+                                                            self.app.update()
+                                                            self.list_box_1.insert(END,
+                                                                                f'"{_file[:pos]} ({num}){_file[pos:]}".')
+                                                            self.app.update()
+                                                            self.reverse_org[key].append(
+                                                                f'{_file[:pos]} ({num}){_file[pos:]}')
+                                                            sl(0.02)
+                                                            break
+                                                        except:
+                                                            continue
+                                                else:
                                                     try:
                                                         os.rename(os.path.join(self.direc_padrao, _file),
-                                                                  os.path.join(self.direc_padrao, key,
-                                                                               f'{_file[:pos]} ({num}){_file[pos:]}'))
+                                                                os.path.join(self.direc_padrao, key, _file))
                                                         self.list_box_1.insert(END,
-                                                                               f'"{_file}" foi movido para a pasta "{key}" e renomeado...')
+                                                                            f'"{_file}" foi movido para a pasta "{key}".')
                                                         self.app.update()
-                                                        self.list_box_1.insert(END,
-                                                                               f'"{_file[:pos]} ({num}){_file[pos:]}".')
-                                                        self.app.update()
-                                                        self.reverse_org[key].append(
-                                                            f'{_file[:pos]} ({num}){_file[pos:]}')
+                                                        self.reverse_org[key].append(_file)
                                                         sl(0.02)
-                                                        break
-                                                    except:
+                                                    except Exception:
+                                                        self.list_box_1.insert(END, f'[ERRO] Não foi possível mover o arquivo "{_file}" para a pasta "{key}".')
                                                         continue
-                                            else:
-                                                try:
-                                                    os.rename(os.path.join(self.direc_padrao, _file),
-                                                            os.path.join(self.direc_padrao, key, _file))
-                                                    self.list_box_1.insert(END,
-                                                                        f'"{_file}" foi movido para a pasta "{key}".')
-                                                    self.app.update()
-                                                    self.reverse_org[key].append(_file)
-                                                    sl(0.02)
-                                                except Exception:
-                                                    self.list_box_1.insert(END, f'[ERRO] Não foi possível mover o arquivo "{_file}" para a pasta "{key}".')
-                                                    continue
-                                            aceito = 1
+                                                aceito = 1
+                                                break
+                                            except:
+                                                continue
+                                        else:
                                             break
-                                        except:
-                                            continue
                                     else:
-                                        break
+                                        continue
+                            
+            self.lista_arq[self.pasta] = os.listdir(self.direc_padrao)
+            for pos, folder in enumerate(self.remove_list_box):
+                if self.remove_list_box[pos][1] in 'Pastas e outros':
+                    self.outros_arquivos = self.remove_list_box[pos][0]
+                try:
+                    if self.lista_arq[self.pasta].count(self.remove_list_box[pos][0]) == 1:
+                        self.lista_arq[self.pasta].remove(str(self.remove_list_box[pos][0]))
+                    elif self.lista_arq[self.pasta].count(str(self.remove_list_box[pos][0]).lower()) == 1:
+                        self.lista_arq[self.pasta].remove(str(self.remove_list_box[pos][0]).lower())
+                    elif self.lista_arq[self.pasta].count(str(self.remove_list_box[pos][0]).capitalize()) == 1:
+                        self.lista_arq[self.pasta].remove(str(self.remove_list_box[pos][0]).capitalize())
+                    else:
+                        mb.showerror(message='[ERRO]')
+                        self.voltar_inicio()
+
+                except:
+                    continue
+
+            if self.backup_cb_lista.count(self.outros_arquivos) == 1:        
+                for _file in self.lista_arq[self.pasta]:
+                    cont = 0
+                    for pos in range(len(_file) - 1, -1, -1):
+                        if cont == 0:
+                            if '.' in _file[pos]:
+                                if os.path.exists(os.path.join(self.direc_padrao, self.outros_arquivos, _file)
+                                                ) and self.lista_arq[self.outros_arquivos].count(_file) != 0:
+                                    for num in range(1, 100):
+                                        try:
+                                            os.rename(os.path.join(self.direc_padrao, _file),
+                                                    os.path.join(self.direc_padrao,
+                                                                self.outros_arquivos,
+                                                                f'{_file[:pos]} ({num}){_file[pos:]}'))
+                                            self.list_box_1.insert(END,
+                                                                f'"{_file}" foi movido para a pasta "{self.outros_arquivos}" renomeado para')
+                                            self.app.update()
+                                            self.list_box_1.insert(END,
+                                                                f'"{_file[:pos]} ({num}){_file[pos:]}".')
+                                            self.app.update()
+                                            self.reverse_org[self.outros_arquivos].append(
+                                                f'{_file[:pos]} ({num}){_file[pos:]}')
+                                            sl(0.02)
+                                            cont = 1
+                                            break
+
+                                        except Exception:
+                                            continue
                                 else:
-                                    continue
-
-        # Pegando o restante que sobrou e jogando em uma pasta
-        self.lista_arq[self.pasta] = os.listdir(self.direc_padrao)
-        for pos, folder in enumerate(self.remove_list_box):
-            if self.remove_list_box[pos][1] in 'Pastas e outros':
-                self.outros_arquivos = self.remove_list_box[pos][0]
-            try:
-                if self.lista_arq[self.pasta].count(self.remove_list_box[pos][0]) == 1:
-                    self.lista_arq[self.pasta].remove(str(self.remove_list_box[pos][0]))
-                elif self.lista_arq[self.pasta].count(str(self.remove_list_box[pos][0]).lower()) == 1:
-                    self.lista_arq[self.pasta].remove(str(self.remove_list_box[pos][0]).lower())
-                elif self.lista_arq[self.pasta].count(str(self.remove_list_box[pos][0]).capitalize()) == 1:
-                    self.lista_arq[self.pasta].remove(str(self.remove_list_box[pos][0]).capitalize())
-                else:
-                    mb.showerror(message='[ERRO]')
-                    self.voltar_inicio()
-
-            except:
-                continue
-
-        for _file in self.lista_arq[self.pasta]:
-            cont = 0
-            for pos in range(len(_file) - 1, -1, -1):
-                if cont == 0:
-                    if '.' in _file[pos]:
-                        if os.path.exists(os.path.join(self.direc_padrao, self.outros_arquivos, _file)
-                                          ) and self.lista_arq[self.outros_arquivos].count(_file) != 0:
-                            for num in range(1, 100):
-                                try:
-                                    os.rename(os.path.join(self.direc_padrao, _file),
-                                              os.path.join(self.direc_padrao,
-                                                           self.outros_arquivos,
-                                                           f'{_file[:pos]} ({num}){_file[pos:]}'))
-                                    self.list_box_1.insert(END,
-                                                           f'"{_file}" foi movido para a pasta "{self.outros_arquivos}" renomeado para')
-                                    self.app.update()
-                                    self.list_box_1.insert(END,
-                                                           f'"{_file[:pos]} ({num}){_file[pos:]}".')
-                                    self.app.update()
-                                    self.reverse_org[self.outros_arquivos].append(
-                                        f'{_file[:pos]} ({num}){_file[pos:]}')
-                                    sl(0.02)
-                                    cont = 1
-                                    break
-
-                                except Exception:
-                                    continue
+                                    try:
+                                        os.rename(os.path.join(self.direc_padrao, _file),
+                                                os.path.join(self.direc_padrao, self.outros_arquivos, _file))
+                                        self.list_box_1.insert(END, f'"{_file}" foi movido para a pasta "{self.outros_arquivos}".')
+                                        self.app.update()
+                                        self.reverse_org[self.outros_arquivos].append(_file)
+                                        sl(0.02)
+                                        cont = 1
+                                    except Exception:
+                                        self.list_box_1.insert(END, f'[ERRO] Não foi possível mover o arquivo "{_file}" para a pasta "{self.outros_arquivos}".')
+                                        continue
+                            else:
+                                continue
                         else:
+                            break
+                
+                    if cont == 0:
+                        if self.backup_cb_lista.count(self.outros_arquivos) == 1:
                             try:
                                 os.rename(os.path.join(self.direc_padrao, _file),
                                         os.path.join(self.direc_padrao, self.outros_arquivos, _file))
@@ -1020,56 +1064,74 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                                 self.app.update()
                                 self.reverse_org[self.outros_arquivos].append(_file)
                                 sl(0.02)
-                                cont = 1
-                            except Exception:
+                            except Exception as e:
+                                print(e)
                                 self.list_box_1.insert(END, f'[ERRO] Não foi possível mover o arquivo "{_file}" para a pasta "{self.outros_arquivos}".')
-                                continue
-                    else:
-                        continue
-                else:
-                    break
-            
-            if cont == 0:
-                try:
-                    os.rename(os.path.join(self.direc_padrao, _file),
-                            os.path.join(self.direc_padrao, self.outros_arquivos, _file))
-                    self.list_box_1.insert(END, f'"{_file}" foi movido para a pasta "{self.outros_arquivos}".')
-                    self.app.update()
-                    self.reverse_org[self.outros_arquivos].append(_file)
-                    sl(0.02)
-                except Exception:
-                    self.list_box_1.insert(END, f'[ERRO] Não foi possível mover o arquivo "{_file}" para a pasta "{self.outros_arquivos}".')
-                    continue
+
+            if len(self.backup_cb_lista) != 0:
+                for folder in self.backup_cb_lista:
+                    self.lista_arq[folder] = os.listdir(os.path.join(self.direc_padrao, folder)) 
+                self.list_box_1.insert(END, 'Êxito!')
+                self.app.update()
             else:
-                continue
+                self.list_box_1.configure(fg="#d00")
+                self.list_box_1.insert(END, '[ERRO]')
+                sl(1)
+                mb.showwarning(message='Nenhuma pasta encontrada ou aceita para mover os arquivos.')
+                mb.showinfo(message='Voltando a tela inicial...')
+                self.voltar_inicio()
 
-        if len(self.backup_cb_formats) != 0:
-            for folder in self.backup_cb_lista:
-                self.lista_arq[folder] = os.listdir(os.path.join(self.direc_padrao, folder))
-            self.list_box_1.insert(END, 'Completado com êxito!')
-            self.app.update()
+            self.btn_2 = Button(self.frame_2, text='Reverter', command=self.exec_reverter_org, bg=bag, fg=fog, font=(
+                'Arial', 10))
+            self.btn_2.pack(side='left', padx=4, pady=1, ipady=2, ipadx=2)
+
+            def configbgcolor(event):
+                self.btn_2.config(bg="#222")
+                return event
+
+            def configbgbag(event):
+                self.btn_2.config(bg=bag)
+                return event
+
+            self.btn_2.bind("<Enter>", configbgcolor)
+            self.btn_2.bind("<Leave>", configbgbag)
+
+            res = self.text_message()
+            if res == 'yes':
+                for folder in self.backup_cb_lista:
+                    try:
+                        if os.path.exists(os.path.join(self.direc_padrao, folder)) and len(os.listdir(
+                                os.path.join(self.direc_padrao, folder))) == 0:
+                            os.rmdir(os.path.join(self.direc_padrao, folder))
+                            self.list_box_1.insert(END, f'Apagando a pasta "{folder}".')
+                            self.app.update()
+                        else:
+                            continue
+                    except OSError:
+                        self.list_box_1.insert(END, f'Não foi possível apagar a pasta "{folder}".')
+                        self.app.update()
         else:
-            self.list_box_1.configure(fg="#d00")
-            self.list_box_1.insert(END, '[ERRO]')
-            sl(1)
-            mb.showwarning(message='Nenhuma pasta encontrada ou aceita para mover os arquivos.')
-            mb.showinfo(message='Voltando a tela inicial...')
-            self.voltar_inicio()
+            
+            self.list_box_1.insert(END, f'[Atenção]')
+            self.list_box_1.insert(END, f'Não existe arquivos para ser movidos na pasta "{self.pasta}"!')
+            self.list_box_1.configure(fg="#F5D93D")
+            self.app.update()
+            sl(0.5)
 
-        self.btn_2 = Button(self.frame_2, text='Reverter', command=self.exec_reverter_org, bg=bag, fg=fog, font=(
-            'Arial', 10))
-        self.btn_2.pack(side='left', padx=4, pady=1, ipady=2, ipadx=2)
-
-        def configbgcolor(event):
-            self.btn_2.config(bg="#222")
-            return event
-
-        def configbgbag(event):
-            self.btn_2.config(bg=bag)
-            return event
-
-        self.btn_2.bind("<Enter>", configbgcolor)
-        self.btn_2.bind("<Leave>", configbgbag)
+            res = self.text_message()
+            if res == 'yes':
+                for folder in self.backup_cb_lista:
+                    try:
+                        if os.path.exists(os.path.join(self.direc_padrao, folder)) and len(os.listdir(
+                                os.path.join(self.direc_padrao, folder))) == 0:
+                            os.rmdir(os.path.join(self.direc_padrao, folder))
+                            self.list_box_1.insert(END, f'Apagando a pasta "{folder}".')
+                            self.app.update()
+                        else:
+                            continue
+                    except OSError:
+                        self.list_box_1.insert(END, f'Não foi possível apagar a pasta "{folder}".')
+                        self.app.update()
 
     def exec_reverter_org(self):
         res = mb.askquestion(message=f'Tem certeza de que deseja reverter a organização na pasta "{self.pasta}"?')
@@ -1111,26 +1173,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
                 for _file in self.reverse_org[key]:
                     self.reverse_org[key].remove(_file)
 
-            def text_message():
-                cont = 0
-                texto = 'Deseja apagar as pastas "'
-                for _folder in self.backup_cb_lista:
-                    self.lista_arq[_folder] = os.listdir(os.path.join(self.direc_padrao, _folder))
-                    if len(self.lista_arq[_folder]) == 0:
-                        cont += 1
-                        if not self.backup_cb_lista[len(self.backup_cb_lista) - 1] == _folder:
-                            texto += _folder + ', '
-                        else:
-                            texto += _folder + '" que não contém arquivos?'
-                    else:
-                        self.backup_cb_lista.remove(_folder)
-                if cont != 0:
-                    question = mb.askquestion(message=texto)
-                    return question
-                else:
-                    return ''
-
-            res = text_message()
+            res = self.text_message()
             if res == 'yes':
                 for folder in self.backup_cb_lista:
                     try:
