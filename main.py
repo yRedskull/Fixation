@@ -879,12 +879,14 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
             lista_folders = list(self.backup_cb_lista)
             for folder in lista_folders:
                 folder_exists = os.path.exists(os.path.join(self.direc_padrao, folder))
+
                 if not folder_exists:
                     try:
                         os.mkdir(os.path.join(self.direc_padrao, folder))
                     except Exception:
                         self.list_box_1.insert(END, f'[ERRO] Não foi possível criar a pasta "{folder}"')
                 else:
+                    self.lista_arq[folder] = os.listdir(os.path.join(self.direc_padrao, folder)) 
                     res = mb.askquestion(
                         icon='warning', message=f'A pasta [{folder}] ja existe, deseja utiliza-la mesmo assim?')
                     if res == 'no':
@@ -913,6 +915,20 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
             self.direc_padrao = ''
             self.voltar_inicio()
 
+    def exec_apagar_pastas(self):
+        for folder in self.backup_cb_lista:
+                    try:
+                        if os.path.exists(os.path.join(self.direc_padrao, folder)) and len(os.listdir(
+                                os.path.join(self.direc_padrao, folder))) == 0:
+                            os.rmdir(os.path.join(self.direc_padrao, folder))
+                            self.list_box_1.insert(END, f'Apagando a pasta "{folder}".')
+                            self.app.update()
+                        else:
+                            continue
+                    except OSError:
+                        self.list_box_1.insert(END, f'Não foi possível apagar a pasta "{folder}".')
+                        self.app.update()
+                        
     def exec_organizar(self, bag=back_gr, fog=fore_gr):
         # Arquivos que não devem ser movidos
         self.lista_no_move = ["desktop.ini", "netuser.ini", "Thumbs.db"]
@@ -1098,18 +1114,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
 
             res = self.text_message()
             if res == 'yes':
-                for folder in self.backup_cb_lista:
-                    try:
-                        if os.path.exists(os.path.join(self.direc_padrao, folder)) and len(os.listdir(
-                                os.path.join(self.direc_padrao, folder))) == 0:
-                            os.rmdir(os.path.join(self.direc_padrao, folder))
-                            self.list_box_1.insert(END, f'Apagando a pasta "{folder}".')
-                            self.app.update()
-                        else:
-                            continue
-                    except OSError:
-                        self.list_box_1.insert(END, f'Não foi possível apagar a pasta "{folder}".')
-                        self.app.update()
+                self.exec_apagar_pastas()
         else:
             
             self.list_box_1.insert(END, f'[Atenção]')
@@ -1120,18 +1125,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
 
             res = self.text_message()
             if res == 'yes':
-                for folder in self.backup_cb_lista:
-                    try:
-                        if os.path.exists(os.path.join(self.direc_padrao, folder)) and len(os.listdir(
-                                os.path.join(self.direc_padrao, folder))) == 0:
-                            os.rmdir(os.path.join(self.direc_padrao, folder))
-                            self.list_box_1.insert(END, f'Apagando a pasta "{folder}".')
-                            self.app.update()
-                        else:
-                            continue
-                    except OSError:
-                        self.list_box_1.insert(END, f'Não foi possível apagar a pasta "{folder}".')
-                        self.app.update()
+                self.exec_apagar_pastas()
 
     def exec_reverter_org(self):
         res = mb.askquestion(message=f'Tem certeza de que deseja reverter a organização na pasta "{self.pasta}"?')
@@ -1175,18 +1169,7 @@ Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=f
 
             res = self.text_message()
             if res == 'yes':
-                for folder in self.backup_cb_lista:
-                    try:
-                        if os.path.exists(os.path.join(self.direc_padrao, folder)) and len(os.listdir(
-                                os.path.join(self.direc_padrao, folder))) == 0:
-                            os.rmdir(os.path.join(self.direc_padrao, folder))
-                            self.list_box_1.insert(END, f'Apagando a pasta "{folder}".')
-                            self.app.update()
-                        else:
-                            continue
-                    except OSError:
-                        self.list_box_1.insert(END, f'Não foi possível apagar a pasta "{folder}".')
-                        self.app.update()
+                self.exec_apagar_pastas()
             if self.list_box_1.get(END) == 'Revertendo...':
                 self.list_box_1.configure(fg="#d00")
                 self.app.update()
