@@ -30,4 +30,3 @@
 * Execute o arquivo `run.py` com dois cliques
 * Siga as intruções nele
 
-### **Em breve lançarei uma versão mais compacta...**
