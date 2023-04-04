@@ -9,7 +9,6 @@ def select_dir(self, bag, fog, fts):
         self.frame_1.destroy()
         self.btn_github.destroy()
 
-        # Quadro
         self.frame_1 = Frame(self.app, borderwidth=2, relief="solid")
         self.frame_1.configure(bg=bag)
         self.frame_1.pack(anchor="center", ipadx=0, padx=0, pady=0, ipady=50, fill=X, expand=True)
@@ -20,7 +19,6 @@ def select_dir(self, bag, fog, fts):
         self.frame_2.columnconfigure(weight=10, index="all")
         self.frame_2.rowconfigure(weight=10, index="all")
 
-        # Itens do Quadro
         self.label_1 = Label(self.frame_2, text='Selecione o diretório.', font=fts, anchor="center", bg=bag, fg=fog)
         self.label_1.grid(column=5, row=0)
 
