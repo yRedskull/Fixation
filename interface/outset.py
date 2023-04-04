@@ -4,12 +4,10 @@ import webbrowser as browser
 from interface.select_dir import select_dir
 
 def outset(self, bag=config['background-Color'], fog=config['foreground-Color'], fts=(config['font'][0], config['font'][1])):
-        # Quadro
         self.frame_1 = Frame(self.app, borderwidth=2, relief="solid")
         self.frame_1.configure(bg=bag)
         self.frame_1.pack(anchor="center", fill=X, expand=True)
 
-        # Itens do Quadro
         self.label_1 = Label(self.frame_1, text=f'''Olá {self.nome}, seja bem vindo ao Fixation!
 Clique no botão abaixo para começarmos.''', anchor="w", bg=bag, fg=fog, font=fts)
         self.label_1.pack(ipadx=1, ipady=1, padx=1, pady=3, side="top")
