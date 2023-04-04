@@ -8,6 +8,8 @@ import os
 
 def reverse_organize(self):
     self.btn_1.config(command='')
+    self.move_cont = 0
+
     res = mb.askquestion(message=f'Tem certeza de que deseja reverter a organização na pasta "{self.pasta}"?')
     if res == 'yes':
         self.btn_2.destroy()
@@ -29,18 +31,18 @@ def reverse_organize(self):
                                         self.direc_padrao,
                                         f'{_file[:pos]} ({self.lista_arq[key].count(_file)}){_file[pos:]}'))
                                     self.list_box_1.insert(END, f'"{_file}" retornou a pasta "{self.pasta}".')
+                                    self.move_cont += 1 
                                     self.list_box_1.see(END)
                                     self.app.update()
-                                    sl(0.02)
                                 except Exception:
                                     self.list_box_1.insert(END, f'[ERRO] Não foi possível retornar o arquivo "{_file}" para a pasta "{self.pasta}".')
                     else:
                         os.rename(os.path.join(self.direc_padrao, key, _file),
                                     os.path.join(self.direc_padrao, _file))
                         self.list_box_1.insert(END, f'"{_file}" retornou a pasta "{self.pasta}".')
+                        self.move_cont += 1 
                         self.list_box_1.see(END)
                         self.app.update()
-                        sl(0.02)
                 else:
                     self.list_box_1.insert(END, f'"{_file}" não existe mais na pasta "{self.pasta}".')
                     self.app.update()
@@ -63,6 +65,11 @@ def reverse_organize(self):
             self.app.update()
             sl(0.5)
             self.list_box_1.insert(END, 'Nenhum item identificado para ser movido!')
+            self.app.update()
+        else:
+            self.list_box_1.insert(END, 'Êxito!')
+            self.list_box_1.insert(END, f'{self.move_cont} itens retornados a pasta "{self.pasta}".' )
+            self.list_box_1.see(END)
             self.app.update()
 
     else:

@@ -7,7 +7,7 @@ from tkinter.ttk import Combobox
 from tkinter import messagebox as mb
 
 
-def select_formats(self, bag, fog, fts):
+def select_formats(self, bag, fog, fts, bg_app):
         if len(self.cb_1_lista) < 7:
             return mb.showwarning(title='Atenção', message="Mínimo de pastas não atingido!!! ")
         else:
@@ -74,7 +74,7 @@ def select_formats(self, bag, fog, fts):
             self.btn_2.bind("<Enter>", configbgcolor)
             self.btn_2.bind("<Leave>", configbgbag)
 
-            self.btn_1 = Button(self.frame_1, image=self.img_back, command=lambda: back_add_folders(self, bag, fog, fts),
+            self.btn_1 = Button(self.frame_1, image=self.img_back, command=lambda: back_add_folders(self, bag, fog, fts, bg_app),
                                 highlightthickness=0, bd=0, bg=bag)
             self.btn_1.pack(pady=5, padx=5, side='left')
 
@@ -89,7 +89,7 @@ def select_formats(self, bag, fog, fts):
             self.btn_1.bind("<Enter>", configbgcolor)
             self.btn_1.bind("<Leave>", configbgbag)
 
-            self.run = Button(self.frame_1, image=self.img_next, command=lambda: init_org(self, bag, fog), highlightthickness=0,
+            self.run = Button(self.frame_1, image=self.img_next, command=lambda: init_org(self, bag, fog, bg_app), highlightthickness=0,
                               bd=0, bg=bag)
             self.run.pack(side='right', pady=5, padx=5)
 

@@ -5,15 +5,13 @@ from tkinter.ttk import Combobox
 from tkinter import messagebox as mb
 from interface.select_formats import select_formats
 
-def add_folders(self, bag, fog, fts):
+def add_folders(self, bag, fog, fts, bg_app):
         if self.direc_padrao == '':
             return mb.showinfo(icon='warning', message='Selecione o diretório antes de continuar!')
 
         self.frame_1.destroy()
         self.frame_2.destroy()
-        # Var
 
-        # Quadro
         self.frame_1 = Frame(self.app, borderwidth=2, relief="solid")
         self.frame_1.configure(bg=bag)
         self.frame_1.pack(anchor="center", ipadx=0, padx=0, pady=0, ipady=50, fill=X, expand=True)
@@ -24,7 +22,6 @@ def add_folders(self, bag, fog, fts):
         self.frame_2.columnconfigure(weight=10, index="all")
         self.frame_2.rowconfigure(weight=10, index="all")
 
-        # Itens do Quadro
         self.label_1 = Label(self.frame_2,
                              text="Adicione as pastas.",
                              bg=bag, fg=fog, font=fts)
@@ -37,10 +34,10 @@ def add_folders(self, bag, fog, fts):
 
         self.btn_4 = Button(self.frame_2, text="Usar Exemplo", command=lambda: cb_1_exemplo(self), highlightthickness=0,
                             bd=1, bg=bag, fg=fog, font=("Arial", 12))
-        self.btn_4.grid(row=8, pady=2)
+        self.btn_4.grid(row=8, pady=2, ipadx=3, ipady=3)
 
         def configbgcolor(event):
-            self.btn_4.config(bg="#222")
+            self.btn_4.config(bg=bg_app)
             return event
 
         def configbgbag(event):
@@ -52,10 +49,10 @@ def add_folders(self, bag, fog, fts):
 
         self.btn_5 = Button(self.frame_2, text='Redefinir', command=lambda: redefinir_pastas(self), highlightthickness=0,
                             bd=1, bg=bag, fg=fog, font=("Arial", 12))
-        self.btn_5.grid(row=9, pady=2)
+        self.btn_5.grid(row=9, pady=2, ipadx=3, ipady=3)
 
         def configbgcolor(event):
-            self.btn_5.config(bg="#222")
+            self.btn_5.config(bg=bg_app)
             return event
 
         def configbgbag(event):
@@ -82,10 +79,10 @@ def add_folders(self, bag, fog, fts):
 
         self.btn_1 = Button(self.frame_2, image=self.img_plus, command=lambda: cb_1_adicionar(self), highlightthickness=0,
                             bd=0, bg=bag)
-        self.btn_1.grid(row=6)
+        self.btn_1.grid(row=6, ipadx=3, ipady=3)
 
         def configbgcolor(event):
-            self.btn_1.config(bg="#222")
+            self.btn_1.config(bg=bg_app)
             return event
 
         def configbgbag(event):
@@ -97,10 +94,10 @@ def add_folders(self, bag, fog, fts):
 
         self.btn_2 = Button(self.frame_2, image=self.img_minus, command=lambda: cb_1_tirar(self), highlightthickness=0, bd=0,
                             bg=bag)
-        self.btn_2.grid(row=7)
+        self.btn_2.grid(row=7, ipadx=3, ipady=3)
 
         def configbgcolor(event):
-            self.btn_2.config(bg="#222")
+            self.btn_2.config(bg=bg_app)
             return event
 
         def configbgbag(event):
@@ -114,12 +111,12 @@ def add_folders(self, bag, fog, fts):
                              anchor="center", bg=bag, fg=fog, font=("Arial", 12))
         self.label_2.pack(ipadx=1, ipady=1, padx=1, pady=1, side="bottom")
 
-        self.btn_3 = Button(self.frame_1, image=self.img_back, command=lambda: back_select_dir(self, bag, fog, fts), font=("Arial", 8),
+        self.btn_3 = Button(self.frame_1, image=self.img_back, command=lambda: back_select_dir(self, bag, fog, fts, bg_app), font=("Arial", 8),
                             highlightthickness=0, bd=0, bg=bag)
-        self.btn_3.pack(ipady=1, ipadx=2, pady=1, padx=2, side="left")
+        self.btn_3.pack(ipady=3, ipadx=3, pady=1, padx=2, side="left")
 
         def configbgcolor(event):
-            self.btn_3.config(bg="#222")
+            self.btn_3.config(bg=bg_app)
             return event
 
         def configbgbag(event):
@@ -129,12 +126,12 @@ def add_folders(self, bag, fog, fts):
         self.btn_3.bind("<Enter>", configbgcolor)
         self.btn_3.bind("<Leave>", configbgbag)
 
-        self.run = Button(self.frame_2, image=self.img_next, command=lambda: select_formats(self, bag, fog, fts), highlightthickness=0,
+        self.run = Button(self.frame_2, image=self.img_next, command=lambda: select_formats(self, bag, fog, fts, bg_app), highlightthickness=0,
                           bd=0, bg=bag)
-        self.run.grid(column=6, row=3)
+        self.run.grid(column=6, row=3, ipadx=3, ipady=3)
 
         def configbgcolor(event):
-            self.run.config(bg="#222")
+            self.run.config(bg=bg_app)
             return event
 
         def configbgbag(event):

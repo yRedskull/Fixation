@@ -7,7 +7,7 @@ from tkinter import *
 import os
 
 
-def organize(self, bag, fog):
+def organize(self, bag, fog, bg_app):
     from gear.back import back_outset
     self.lista_no_move = ["desktop.ini", "netuser.ini", "Thumbs.db"]
     for _file in self.lista_no_move:
@@ -44,6 +44,7 @@ def organize(self, bag, fog):
                                                                             f'{_file[:pos]} ({num}){_file[pos:]}'))
                                                         self.list_box_1.insert(END,
                                                                             f'"{_file}" foi movido para a pasta "{key}" e renomeado...')
+                                                        self.move_cont += 1 
                                                         self.list_box_1.see(END)
                                                         self.app.update()
                                                         self.list_box_1.insert(END,
@@ -51,7 +52,6 @@ def organize(self, bag, fog):
                                                         self.app.update()
                                                         self.reverse_org[key].append(
                                                             f'{_file[:pos]} ({num}){_file[pos:]}')
-                                                        sl(0.02)
                                                         break
                                                     except:
                                                         continue
@@ -61,10 +61,10 @@ def organize(self, bag, fog):
                                                             os.path.join(self.direc_padrao, key, _file))
                                                     self.list_box_1.insert(END,
                                                                         f'"{_file}" foi movido para a pasta "{key}".')
+                                                    self.move_cont += 1 
                                                     self.list_box_1.see(END)
                                                     self.app.update()
                                                     self.reverse_org[key].append(_file)
-                                                    sl(0.02)
                                                 except Exception:
                                                     self.list_box_1.insert(END, f'[ERRO] Não foi possível mover o arquivo "{_file}" para a pasta "{key}".')
                                                     continue
@@ -114,6 +114,7 @@ def organize(self, bag, fog):
                                                             f'{_file[:pos]} ({num}){_file[pos:]}'))
                                         self.list_box_1.insert(END,
                                                             f'"{_file}" foi movido para a pasta "{self.outros_arquivos}" renomeado para')
+                                        self.move_cont += 1 
                                         self.list_box_1.see(END)
                                         self.app.update()
                                         self.list_box_1.insert(END,
@@ -121,7 +122,6 @@ def organize(self, bag, fog):
                                         self.app.update()
                                         self.reverse_org[self.outros_arquivos].append(
                                             f'{_file[:pos]} ({num}){_file[pos:]}')
-                                        sl(0.02)
                                         cont = 1
                                         break
 
@@ -132,10 +132,10 @@ def organize(self, bag, fog):
                                     os.rename(os.path.join(self.direc_padrao, _file),
                                             os.path.join(self.direc_padrao, self.outros_arquivos, _file))
                                     self.list_box_1.insert(END, f'"{_file}" foi movido para a pasta "{self.outros_arquivos}".')
+                                    self.move_cont += 1 
                                     self.list_box_1.see(END)
                                     self.app.update()
                                     self.reverse_org[self.outros_arquivos].append(_file)
-                                    sl(0.02)
                                     cont = 1
                                 except Exception:
                                     self.list_box_1.insert(END, f'[ERRO] Não foi possível mover o arquivo "{_file}" para a pasta "{self.outros_arquivos}".')
@@ -151,10 +151,10 @@ def organize(self, bag, fog):
                             os.rename(os.path.join(self.direc_padrao, _file),
                                     os.path.join(self.direc_padrao, self.outros_arquivos, _file))
                             self.list_box_1.insert(END, f'"{_file}" foi movido para a pasta "{self.outros_arquivos}".')
+                            self.move_cont += 1 
                             self.list_box_1.see(END)
                             self.app.update()
                             self.reverse_org[self.outros_arquivos].append(_file)
-                            sl(0.02)
                         except Exception as e:
                             print(e)
                             self.list_box_1.insert(END, f'[ERRO] Não foi possível mover o arquivo "{_file}" para a pasta "{self.outros_arquivos}".')
@@ -163,6 +163,7 @@ def organize(self, bag, fog):
             for folder in self.backup_cb_lista:
                 self.lista_arq[folder] = os.listdir(os.path.join(self.direc_padrao, folder)) 
             self.list_box_1.insert(END, 'Êxito!')
+            self.list_box_1.insert(END, f'{self.move_cont} itens movidos.' )
             self.list_box_1.see(END)
             self.app.update()
         else:
@@ -173,12 +174,14 @@ def organize(self, bag, fog):
             mb.showinfo(message='Voltando a tela inicial...')
             outset(self)
 
+        self.btn_1.config(command=lambda: back_outset(self))
+
         self.btn_2 = Button(self.frame_2, text='Reverter', command=lambda: reverse_organize(self), bg=bag, fg=fog, font=(
             'Arial', 10))
         self.btn_2.pack(side='left', padx=4, pady=1, ipady=2, ipadx=2)
 
         def configbgcolor(event):
-            self.btn_2.config(bg="#222")
+            self.btn_2.config(bg=bg_app)
             return event
 
         def configbgbag(event):
@@ -192,7 +195,6 @@ def organize(self, bag, fog):
         if res == 'yes':
             del_folders(self)
 
-        self.btn_1.config(command=lambda: back_outset(self))
     else:
         
         self.list_box_1.insert(END, f'[Atenção]')

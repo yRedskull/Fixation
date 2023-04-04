@@ -28,10 +28,11 @@ class Start:
         self.app.resizable(False, False)
 
         self.app.iconphoto(False, self.img_logo)
-        self.app.title(f"Fixation {config['version']}")
-        self.app.configure(background="#222")
+        self.app.title(f"Fixation {config['Version']}")
+        self.app.configure(background=config["Background-Color-APP"])
 
         self.nome = os.getlogin()
+        self.move_cont = 0 
         self.lista_no_move = list()
         self.cb_1_lista = list()
         self.backup_cb_lista = list()

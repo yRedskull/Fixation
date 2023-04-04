@@ -1,7 +1,8 @@
 {
-    "version": 1.9,
-    "background-Color" : "#333",
-    "foreground-Color" : "#DE6F1B",
-    "font" : ["Arial", 14],
+    "Version": 1.9,
+    "Background-Color-APP": "#222",
+    "Background-Color" : "#292929",
+    "Foreground-Color" : "#DE6F1B",
+    "Font" : ["Arial", 14],
     "Auto-Update": ""
 }
