@@ -38,10 +38,9 @@ def select_formats(self, bag, fog, fts, bg_app):
                 'Documentos': ['*.pdf', '*.pptx', '*.txt', '*.cdr', '*.xml', '*.sql', '*.word', '*.doc', '*.docx',
                                '*.rtf', '*.ppt', '*.pps', '*.xls', '*.xlsx', '*.html', '*.dwg'],
                 'Executáveis': ['*.exe', '*.msi', '*.bat', '*.bin', '*.app', '*.iso'],
-                'Imagens': ['*.jpeg', '*.jpg', '*.png', '*.gif', '*.jfif', '*.svg', '*.psd', '*.webp', '*.raw',
-                            '*.tiff', '*.bmp'],
+                'Imagens': ['*.jpeg', '*.jpg', '*.png', '*.gif', '*.jfif', '*.svg', '*.psd', '*.webp', '*.raw','*.tiff', '*.bmp', '*.cr2', '*.dng', '*.gpr', '*.nef'],
                 'Compactados': ['*.zip', '*.rar', '*.7z'],
-                'Áudios': ['*.mp3', '*.wma', '*.wav', '*.pcm', '*.flac'],
+                'Áudios': ['*.mp3', '*.wma', '*.wav', '*.pcm', '*.flac', '*.m4a', '*.ogg'],
                 'Vídeos': ['*.mp4', '*.avi', '*.wmv', '*.mov', '*.flv', '*.f4v', '*.swf', '*.mkv', '*.mpeg-2', '*.mv4']
             }
 
