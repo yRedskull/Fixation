@@ -1,6 +1,6 @@
 # **Fixation**
 * **Organizador de diretório com interface gráfica**
-* **Veja como o programa funciona [aqui](https://yredskull.github.io/Fixation/view)**
+* **Veja como o programa funciona [aqui](https://yredskull.github.io/Fixation/site_view)**
 
 ## **Features:**
 * **📋 Organiza qualquer diretório criando pastas com cada tipo de formatos escolhido**
@@ -29,5 +29,3 @@
 * **Entre na pasta onde o repositório foi clonado**
 * Execute o arquivo `run.py` com dois cliques
 * Siga as intruções nele
-
-### **Em breve lançarei uma versão mais compacta...**

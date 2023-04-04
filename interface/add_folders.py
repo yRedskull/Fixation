@@ -11,7 +11,6 @@ def add_folders(self, bag, fog, fts, bg_app):
 
         self.frame_1.destroy()
         self.frame_2.destroy()
-
         self.frame_1 = Frame(self.app, borderwidth=2, relief="solid")
         self.frame_1.configure(bg=bag)
         self.frame_1.pack(anchor="center", ipadx=0, padx=0, pady=0, ipady=50, fill=X, expand=True)
@@ -126,8 +125,7 @@ def add_folders(self, bag, fog, fts, bg_app):
         self.btn_3.bind("<Enter>", configbgcolor)
         self.btn_3.bind("<Leave>", configbgbag)
 
-        self.run = Button(self.frame_2, image=self.img_next, command=lambda: select_formats(self, bag, fog, fts, bg_app), highlightthickness=0,
-                          bd=0, bg=bag)
+        self.run = Button(self.frame_2, image=self.img_next, command=lambda: select_formats(self, bag, fog, fts, bg_app), highlightthickness=0, bd=0, bg=bag)
         self.run.grid(column=6, row=3, ipadx=3, ipady=3)
 
         def configbgcolor(event):
