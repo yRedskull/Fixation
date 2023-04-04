@@ -11,9 +11,7 @@ def add_folders(self, bag, fog, fts):
 
         self.frame_1.destroy()
         self.frame_2.destroy()
-        # Var
-
-        # Quadro
+        
         self.frame_1 = Frame(self.app, borderwidth=2, relief="solid")
         self.frame_1.configure(bg=bag)
         self.frame_1.pack(anchor="center", ipadx=0, padx=0, pady=0, ipady=50, fill=X, expand=True)
@@ -24,7 +22,6 @@ def add_folders(self, bag, fog, fts):
         self.frame_2.columnconfigure(weight=10, index="all")
         self.frame_2.rowconfigure(weight=10, index="all")
 
-        # Itens do Quadro
         self.label_1 = Label(self.frame_2,
                              text="Adicione as pastas.",
                              bg=bag, fg=fog, font=fts)
