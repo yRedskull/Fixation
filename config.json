@@ -1,0 +1,7 @@
+{
+    "version": 1.9,
+    "background-Color" : "#333",
+    "foreground-Color" : "#DE6F1B",
+    "font" : ["Arial", 14],
+    "Auto-Update": ""
+}

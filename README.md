@@ -27,7 +27,7 @@
 
 ### **3. Execução 🦈**
 * **Entre na pasta onde o repositório foi clonado**
-* Execute o arquivo `main.py` com dois cliques
+* Execute o arquivo `run.py` com dois cliques
 * Siga as intruções nele
 
 ### **Em breve lançarei uma versão mais compacta...**
