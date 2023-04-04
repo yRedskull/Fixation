@@ -50,20 +50,16 @@ def init_org(self, bag, fog):
             self.list_box_1.pack(ipady=130, ipadx=400, padx=5, pady=5, fill=BOTH, expand=True)
             
             mb.showinfo(message='As alterações a seguir poderão ser desfeitas caso deseje.')
-            # Pegando apenas o nome do diretório
             for carac in range(len(self.direc_padrao) - 1, -1, -1):
                 if self.direc_padrao[carac] == '/':
                     self.pasta = self.direc_padrao[carac + 1:]
                     break
-            # Question
             self.iniciar = mb.askquestion(title='Atenção', message=f'Iniciar a organização na pasta {self.pasta}?',
                                           icon='question')
             if self.iniciar == 'no':
                 mb.showinfo(message='Voltando a tela inicial...')
                 back_outset(self)
             else:
-                # Trocando as keys dos formatos em self.formats para serem identificadas pelas pastas escritas pelo
-                # usuário
                 self.formats_descart = dict(self.formats)
                 for folder in self.remove_list_box:
                     cont = 0
