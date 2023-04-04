@@ -46,20 +46,16 @@ def list_box_anexo(self):
             show_formats(self)
 
 def list_box_desanexar(self):
-    # Caso tenha algum item no Listbox
     if len(self.remove_list_box) > 0:
         select = str(self.list_box_1.get(ACTIVE))
         pos = select.index('|')
         folder = select[:pos - 1]
         format_ = select[pos + 2:]
-        # Posição do item no remove_list
         for c, v in enumerate(self.remove_list_box):
             for f in self.remove_list_box[c]:
                 if f == folder:
                     pos = c
-        # removendo da lista remove_list o item selecionado
         self.remove_list_box.remove(self.remove_list_box[pos])
-        # Voltando para lista principal os itens selecionados
         self.cb_1_lista.append(folder)
         self.list_formats.append(format_)
         self.cb_1.config(values=self.cb_1_lista)
