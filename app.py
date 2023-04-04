@@ -1,4 +1,3 @@
-# Import
 import os
 from tkinter import *
 from var import config
