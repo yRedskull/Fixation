@@ -15,10 +15,8 @@ def create_folders(self):
     self.list_box_1.insert(END, txt_create_folders(self))
     self.app.update()
     sl(0.3)
-    # Criação de pastas
-    folder_exists = os.path.exists(self.direc_padrao)  # Verificando a existência da pasta
+    folder_exists = os.path.exists(self.direc_padrao) 
     if folder_exists:
-        # Criando uma lista com os arquivos dentro do diretório escolhido
         self.lista_arq[str(self.pasta)] = os.listdir(self.direc_padrao)
         lista_folders = list(self.backup_cb_lista)
         for folder in lista_folders:
@@ -39,7 +37,6 @@ def create_folders(self):
                 else:
                     continue
 
-        # Dicionário onde irá alojar todos os arquivos das pastas, caso elas existam.
         if len(self.backup_cb_lista) != 0:
             self.list_box_1.insert(END, 'Êxito!')
             self.app.update()
