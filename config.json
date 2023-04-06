@@ -1,8 +1,40 @@
 {
-    "Version": 1.9,
+    "Version": 1.0,
     "Background-Color-APP": "#222",
     "Background-Color" : "#292929",
     "Foreground-Color" : "#DE6F1B",
     "Font" : ["Arial", 14],
-    "Auto-Update": ""
+    "Auto-Update": {
+        "url-config": "https://raw.githubusercontent.com/yRedskull/Fixation/main/config.json",
+        "url": "https://raw.githubusercontent.com/yRedskull/Fixation/main/",
+        "folders-files": [
+            "image/anexo.png",
+            "image/back.png",
+            "image/config.png",
+            "image/explorer.png",
+            "image/github.png",
+            "image/information.png",
+            "image/logo.png",
+            "image/minus.png",
+            "image/next.png",
+            "image/plus.png",
+            "image/start.png",
+            "interface/app.py",
+            "interface/outset.py",
+            "interface/select_dir.py",
+            "interface/add_folders.py",
+            "interface/select_formats.py",
+            "interface/init_org.py",
+            "gear/apart.py",
+            "gear/back.py",
+            "gear/folders.py",
+            "gear/listbox.py",
+            "engine/create_folders.py",
+            "engine/del_folders.py",
+            "engine/organize.py",
+            "engine/reverse_organize.py",
+            "var.py",
+            "config.json"
+        ]
+    }
 }
