@@ -52,20 +52,20 @@ class Auto_Update:
     def Update_file(self):
         cont = 0
         for file in self.files:
-            try:
-                self.Varp.set(cont)
+            self.Varp.set(cont)
+            try:        
                 url_online = os.path.join(self.url_base, file)
                 local_file = os.path.join(os.getcwd(), file)
-                if os.path.exists(local_file):
-                    if 'image' in file:
-                        continue
-                    else:
-                        with open(local_file, 'w') as arquivo:
-                            page_file = request.urlopen(url_online).read().decode('utf-8')
-                            arquivo.write(page_file)
-                else:
-                    request.urlretrieve(os.path.join(self.url_base, file), local_file)
-                cont += 1
+                if file.count('/') >= 1:
+                    for pos, l in enumerate(file):
+                        if '/' == file[pos]:
+                            pasta = file[:pos]
+                            break
+                    if not os.path.exists(os.path.join(os.getcwd(), pasta)):
+                        os.mkdir(pasta)
+                request.urlretrieve(url_online, local_file)
             except:
+                cont += 1
                 continue
+            cont += 1
         self.Varp.set(len(self.files))      
