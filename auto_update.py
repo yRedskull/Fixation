@@ -4,14 +4,14 @@ from var import config
 from urllib import request
 import json
 import os
+from time import sleep as sl
 
 class Auto_Update:
     def __init__(self):
         try: 
             on_config = request.urlopen(config["Auto-Update"]["url-config"])
             on_config_json = json.loads(on_config.read().decode('utf8'))
-            print(on_config_json)
-            if on_config_json["Version"] == config["Version"]:
+            if on_config_json["Version"] != config["Version"]:
                 self.upt = Tk()
                 self.upt.title('Auto-Update')
                 self.upt.iconphoto(False, PhotoImage(file="image/logo.png", master=self.upt))
@@ -23,13 +23,13 @@ class Auto_Update:
                 self.width_screen = self.upt.winfo_screenwidth()
                 self.height_screen = self.upt.winfo_screenheight()
                 self.win_width = 280
-                self.win_height = 80
+                self.win_height = 100
                 self.width_plus = (self.width_screen//2 - self.win_width//2) 
                 self.height_plus = (self.height_screen//2 - self.win_height//2) 
                 self.upt.geometry(f"{self.win_width}x{self.win_height}+{self.width_plus}+{self.height_plus}")
                 self.upt.resizable(False, False)
                 
-                self.text_checkin = Label(self.upt, text='Update of Fixation', font=('Arial', 14))
+                self.text_checkin = Label(self.upt, text='Auto Update Fixation', font=('Arial', 14))
                 self.text_checkin.pack(side='top', padx=5, pady=5)
 
                 self.Varp = DoubleVar()
@@ -37,7 +37,10 @@ class Auto_Update:
                 self.progressbar.pack(ipadx=200, padx=3, pady=3)
 
 
-                self.Update_files()
+                self.Update_file()
+                
+                self.sair = Button(self.upt, text="Close",command=self.upt.destroy, font=("Arial", 12))
+                self.sair.pack(side="bottom", padx=2, pady=2, ipadx=10, ipady=3)
 
                 self.upt.mainloop()
             else:
@@ -47,6 +50,22 @@ class Auto_Update:
         
 
     def Update_file(self):
+        cont = 0
         for file in self.files:
-            url = os.path.join(self.url_base, file)
-            local = os.path.join(os.getcwd(), file)
+            try:
+                self.Varp.set(cont)
+                url_online = os.path.join(self.url_base, file)
+                local_file = os.path.join(os.getcwd(), file)
+                if os.path.exists(local_file):
+                    if 'image' in file:
+                        continue
+                    else:
+                        with open(local_file, 'w') as arquivo:
+                            page_file = request.urlopen(url_online).read().decode('utf-8')
+                            arquivo.write(page_file)
+                else:
+                    request.urlretrieve(os.path.join(self.url_base, file), local_file)
+                cont += 1
+            except:
+                continue
+        self.Varp.set(len(self.files))      
