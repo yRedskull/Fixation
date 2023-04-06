@@ -1,11 +1,10 @@
 from interface.app import Start
 from auto_update import Auto_Update
-from time import sleep as sl
+from var import *
 
 if __name__ == "__main__":
-    try:
+
+    if on_config_json["Version"] != config["Version"]:
         Auto_Update()
-    except Exception:
-        print('erro')
-    sl(0.1)
-    Start()
+    else:
+        Start()
