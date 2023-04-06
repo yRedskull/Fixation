@@ -28,7 +28,7 @@ class Auto_Update:
             self.upt.resizable(False, False)
             
             
-            self.text_checkin = Label(self.upt, text='Auto Update Fixation', font=fts)
+            self.text_checkin = Label(self.upt, text='Auto Update Fixation', fg=fog, bg=bag, font=fts)
             self.text_checkin.pack(side='top', padx=5, pady=5)
 
             self.Varp = DoubleVar()
@@ -47,7 +47,10 @@ class Auto_Update:
 
     def Restart(self):
         self.upt.destroy()
-        os.startfile('run.py') 
+        if os.path.exists:
+            os.startfile('Fixation.exe')
+        else:
+            os.startfile('run.py')
 
     def Update_file(self):
         cont = 0
