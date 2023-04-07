@@ -72,7 +72,6 @@ class Auto_Update:
                 cont += 1
                 continue
             self.upt.update()
-            sl(0.05)
             cont += 1
         self.Varp.set(len(self.files))    
         self.upt.update()
