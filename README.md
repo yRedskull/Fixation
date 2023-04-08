@@ -1,6 +1,6 @@
 # **Fixation**
 * **Organizador de diretório com interface gráfica**
-* **Veja como o programa funciona [aqui](https://yredskull.github.io/Fixation/site_view)**
+* **Veja como o programa funciona [aqui](https://yredskull.github.io/Fixation/view)**
 
 ## **Features:**
 * **📋 Organiza qualquer diretório criando pastas com cada tipo de formatos escolhido**
