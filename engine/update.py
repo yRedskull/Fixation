@@ -39,7 +39,7 @@ def Restart(self):
         if os.path.exists('Fixation.exe'):
             subprocess.call('Fixation.exe', shell=True)
         else:
-            subprocess.call('run.pyw', shell=True)
+            subprocess.call('run.py', shell=True)
 
 if __name__ == "__main__":
     subprocess.call('auto_update.pyw', shell=True)
