@@ -5,6 +5,8 @@ import os
 
 
 def Update_file(self, bag, fog, fts):
+        self.verficar.destroy()
+        
         cont = 0
         for file in self.files:
             self.Varp.set(cont)
