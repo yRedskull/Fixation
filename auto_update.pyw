@@ -1,8 +1,9 @@
 from tkinter import *
+from tkinter import messagebox as mb
 from tkinter.ttk import Progressbar
 from var import on_config_json, config
 from threading import Thread
-from engine.update import Update_file
+from engine.update import Update_file, Restart
 
 
 class Auto_Update:
@@ -20,7 +21,7 @@ class Auto_Update:
             self.width_screen = self.upt.winfo_screenwidth()
             self.height_screen = self.upt.winfo_screenheight()
             self.win_width = 280
-            self.win_height = 100
+            self.win_height = 130
             self.width_plus = (self.width_screen//2 - self.win_width//2) 
             self.height_plus = (self.height_screen//2 - self.win_height//2) 
             self.upt.geometry(f"{self.win_width}x{self.win_height}+{self.width_plus}+{self.height_plus}")
@@ -31,10 +32,22 @@ class Auto_Update:
 
             self.Varp = DoubleVar()
             self.progressbar = Progressbar(self.upt, variable=self.Varp, maximum=len(self.auto_update["folders-files"]))
-            self.progressbar.pack(ipadx=200, padx=3, pady=3)
+            self.progressbar.pack(ipadx=200, ipady=6, padx=3, pady=3)
 
+            def configbgcolor(event):
+                self.verificar.config(bg='#333')
+                return event
+
+            def configbgbag(event):
+                self.verificar.config(bg=bag)
+                return event
+            
+            self.verificar = Button(self.upt, text="Atualizar",command=lambda: Thread(target=lambda: Update_file(self, bag, fog, fts)).start(),
+                                     bg=bag, fg=fog,font=fts, highlightthickness=0, border=0)
+            self.verificar.pack(side="bottom", padx=4, pady=4, ipadx=10, ipady=3)
+            self.verificar.bind("<Enter>", configbgcolor)
+            self.verificar.bind("<Leave>", configbgbag)
             self.upt.update()
-            Thread(target=lambda: Update_file(self, bag, fog, fts)).start()
 
             self.upt.mainloop()
         except Exception:
