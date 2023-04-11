@@ -58,31 +58,16 @@ class Auto_Update:
             self.Varp.set(cont)
             try:        
                 url_online_file = os.path.join(self.url_base, file)
-                url_on_content = request.urlopen(url_online_file).read().decode('utf8')
                 url_local_file = os.path.join(os.getcwd(), file)
-                if os.path.exists(url_local_file):
-                    with open(url_local_file, 'r') as file_txt:
-                        file_txt = file_txt.read()
-                        if file_txt != url_on_content:
-                            if file.count('/') >= 1:
-                                for pos, l in enumerate(file):
-                                    if '/' == file[pos]:
-                                        pasta = file[:pos]
-                                        break
-                                if not os.path.exists(os.path.join(os.getcwd(), pasta)):
-                                    os.mkdir(pasta)
-                                request.urlretrieve(url_online_file, url_local_file)
-                            else:    
-                                continue
-                else:
-                    if file.count('/') >= 1:
-                            for pos, l in enumerate(file):
-                                if '/' == file[pos]:
-                                    pasta = file[:pos]
-                                    break
-                            if not os.path.exists(os.path.join(os.getcwd(), pasta)):
-                                os.mkdir(pasta)
-                            request.urlretrieve(url_online_file, url_local_file)
+                if file.count('/') >= 1:
+                    for pos, l in enumerate(file):
+                        if '/' == file[pos]:
+                            pasta = file[:pos]
+                            break
+                    if not os.path.exists(os.path.join(os.getcwd(), pasta)):
+                        os.mkdir(pasta)
+                request.urlretrieve(url_online_file, url_local_file)
+
 
 
             except:
