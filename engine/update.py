@@ -4,7 +4,7 @@ from threading import Thread
 import subprocess, os
 
 
-def Update_file(self, bag, fog, fts):
+def Update_file(self, bag, fog, fts, bg_app):
         self.verificar.destroy()
         
         cont = 0
@@ -29,9 +29,21 @@ def Update_file(self, bag, fog, fts):
             cont += 1
         self.Varp.set(len(self.files))    
         self.upt.update()
+
+        def configbgcolor(event):
+                self.restart.config(bg=bg_app)
+                return event
+
+        def configbgbag(event):
+            self.restart.config(bg=bag)
+            return event
+        
         self.restart = Button(self.upt, text="Reiniciar",command=lambda: Thread(target=Restart(self)),
                               bg=bag, fg=fog,font=fts, highlightthickness=0, bd=0)
         self.restart.pack(side="bottom", padx=2, pady=2, ipadx=10, ipady=3)
+        self.restart.bind("<Enter>", configbgcolor)
+        self.restart.bind("<Leave>", configbgbag)
+
         self.upt.update()
     
 def Restart(self):
