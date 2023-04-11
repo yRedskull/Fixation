@@ -41,7 +41,7 @@ def select_formats(self, bag, fog, fts, bg_app):
                 'Imagens': ['*.jpeg', '*.jpg', '*.png', '*.gif', '*.jfif', '*.svg', '*.psd', '*.webp', '*.raw','*.tiff', '*.bmp', '*.cr2', '*.dng', '*.gpr', '*.nef'],
                 'Compactados': ['*.zip', '*.rar', '*.7z'],
                 'Áudios': ['*.mp3', '*.wma', '*.wav', '*.pcm', '*.flac', '*.m4a', '*.ogg'],
-                'Vídeos': ['*.mp4', '*.avi', '*.wmv', '*.mov', '*.flv', '*.f4v', '*.swf', '*.mkv', '*.mpeg-2', '*.mv4']
+                'Vídeos': ['*.mp4', '*.avi', '*.wmv', '*.mov', '*.flv', '*.f4v', '*.swf', '*.mkv', '*.mpeg-2', '*.m4v']
             }
 
             def cb_2_formats():
