@@ -43,12 +43,12 @@ def organize(self, bag, fog, bg_app):
                                                                 os.path.join(self.direc_padrao, key,
                                                                             f'{_file[:pos]} ({num}){_file[pos:]}'))
                                                         self.list_box_1.insert(END,
-                                                                            f'"{_file}" foi movido para a pasta "{key}" e renomeado...')
+                                                                            f'["{_file}" foi movido para a pasta "{key}" e renomeado...')
                                                         self.move_cont += 1 
                                                         self.list_box_1.see(END)
                                                         self.app.update()
                                                         self.list_box_1.insert(END,
-                                                                            f'"{_file[:pos]} ({num}){_file[pos:]}".')
+                                                                            f'"{_file[:pos]} ({num}){_file[pos:]}"]')
                                                         self.app.update()
                                                         self.reverse_org[key].append(
                                                             f'{_file[:pos]} ({num}){_file[pos:]}')
