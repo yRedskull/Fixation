@@ -44,7 +44,7 @@ def reverse_organize(self):
                         self.list_box_1.see(END)
                         self.app.update()
                 else:
-                    self.list_box_1.insert(END, f'"{_file}" não existe mais na pasta "{self.pasta}".')
+                    self.list_box_1.insert(END, f'["{_file}" não existe mais na pasta "{self.pasta}"]')
                     self.app.update()
 
         for key in self.reverse_org:
