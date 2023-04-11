@@ -1,7 +1,10 @@
 from urllib import request
+from tkinter import Button
+from threading import Thread
 import os
 
-def Update_file(self):
+
+def Update_file(self, bag, fog, fts):
         cont = 0
         for file in self.files:
             self.Varp.set(cont)
@@ -23,6 +26,9 @@ def Update_file(self):
             self.upt.update()
             cont += 1
         self.Varp.set(len(self.files))    
+        self.upt.update()
+        self.restart = Button(self.upt, text="Reiniciar",command=lambda: Thread(target=Restart(self)), bg=bag, fg=fog,font=fts)
+        self.restart.pack(side="bottom", padx=2, pady=2, ipadx=10, ipady=3)
         self.upt.update()
     
 def Restart(self):

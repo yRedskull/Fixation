@@ -34,12 +34,10 @@ class Auto_Update:
             self.progressbar.pack(ipadx=200, padx=3, pady=3)
 
             self.upt.update()
-            Thread(target=lambda: Update_file(self)).start()
-        
-            self.restart = Button(self.upt, text="Reiniciar",command=lambda: Restart(self), bg=bag, fg=fog,font=fts)
-            self.restart.pack(side="bottom", padx=2, pady=2, ipadx=10, ipady=3)
+            Thread(target=lambda: Update_file(self, bag, fog, fts)).start()
 
             self.upt.mainloop()
         except Exception:
             pass
+
         

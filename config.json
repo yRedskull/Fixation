@@ -34,7 +34,9 @@
             "engine/organize.py",
             "engine/reverse_organize.py",
             "var.py",
-            "config.json"
+            "config.json",
+            "run.py",
+            "auto_update.py"
         ]
     }
 }
