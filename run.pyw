@@ -4,7 +4,7 @@ import os
 
 def Run():
     if on_config_json["Version"] != config["Version"]:
-        os.startfile('auto_update')
+        os.startfile('auto_update.pyw')
     else:
         os.startfile('interface/app.pyw')
 
