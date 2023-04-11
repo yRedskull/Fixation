@@ -1,9 +1,8 @@
 from tkinter import *
 from tkinter.ttk import Progressbar
 from var import on_config_json, config
-from urllib import request
-import os
 from threading import Thread
+from engine.update import Update_file, Restart
 
 
 class Auto_Update:
@@ -27,7 +26,6 @@ class Auto_Update:
             self.upt.geometry(f"{self.win_width}x{self.win_height}+{self.width_plus}+{self.height_plus}")
             self.upt.resizable(False, False)
             
-            
             self.text_checkin = Label(self.upt, text='Auto Update Fixation', fg=fog, bg=bag, font=fts)
             self.text_checkin.pack(side='top', padx=5, pady=5)
 
@@ -36,45 +34,12 @@ class Auto_Update:
             self.progressbar.pack(ipadx=200, padx=3, pady=3)
 
             self.upt.update()
-            Thread(target=self.Update_file).start()
+            Thread(target=lambda: Update_file(self)).start()
         
-            self.sair = Button(self.upt, text="Reiniciar",command=self.Restart, bg=bag, fg=fog,font=fts)
-            self.sair.pack(side="bottom", padx=2, pady=2, ipadx=10, ipady=3)
+            self.restart = Button(self.upt, text="Reiniciar",command=lambda: Restart(self), bg=bag, fg=fog,font=fts)
+            self.restart.pack(side="bottom", padx=2, pady=2, ipadx=10, ipady=3)
 
             self.upt.mainloop()
         except Exception:
             pass
-
-    def Restart(self):
-        self.upt.destroy()
-        if os.path.exists('Fixation.exe'):
-            os.startfile('Fixation.exe')
-        else:
-            os.startfile('run.py')
-
-    def Update_file(self):
-        cont = 0
-        for file in self.files:
-            self.Varp.set(cont)
-            try:        
-                url_online_file = os.path.join(self.url_base, file)
-                url_local_file = os.path.join(os.getcwd(), file)
-                if file.count('/') >= 1:
-                    for pos, l in enumerate(file):
-                        if '/' == file[pos]:
-                            pasta = file[:pos]
-                            break
-                    if not os.path.exists(os.path.join(os.getcwd(), pasta)):
-                        os.mkdir(pasta)
-                request.urlretrieve(url_online_file, url_local_file)
-
-
-
-            except:
-                cont += 1
-                continue
-            self.upt.update()
-            cont += 1
-        self.Varp.set(len(self.files))    
-        self.upt.update()
         
