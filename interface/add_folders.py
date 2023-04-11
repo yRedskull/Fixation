@@ -32,8 +32,8 @@ def add_folders(self, bag, fog, fts, bg_app):
         self.label_3.grid(row=3)
 
         self.btn_4 = Button(self.frame_2, text="Usar Exemplo", command=lambda: cb_1_exemplo(self), highlightthickness=0,
-                            bd=1, bg=bag, fg=fog, font=("Arial", 12))
-        self.btn_4.grid(row=8, pady=2, ipadx=3, ipady=3)
+                            bd=0, bg=bag, fg=fog, font=("Arial", 12))
+        self.btn_4.grid(row=8, pady=3, ipadx=3, ipady=3)
 
         def configbgcolor(event):
             self.btn_4.config(bg=bg_app)
@@ -47,8 +47,8 @@ def add_folders(self, bag, fog, fts, bg_app):
         self.btn_4.bind("<Leave>", configbgbag)
 
         self.btn_5 = Button(self.frame_2, text='Redefinir', command=lambda: redefinir_pastas(self), highlightthickness=0,
-                            bd=1, bg=bag, fg=fog, font=("Arial", 12))
-        self.btn_5.grid(row=9, pady=2, ipadx=3, ipady=3)
+                            bd=0, bg=bag, fg=fog, font=("Arial", 12))
+        self.btn_5.grid(row=9, pady=3, ipadx=3, ipady=3)
 
         def configbgcolor(event):
             self.btn_5.config(bg=bg_app)
