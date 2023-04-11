@@ -3,7 +3,6 @@ from tkinter.ttk import Progressbar
 from var import on_config_json, config
 from urllib import request
 import os
-from time import sleep as sl
 from threading import Thread
 
 
