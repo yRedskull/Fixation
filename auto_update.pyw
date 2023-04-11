@@ -42,4 +42,3 @@ class Auto_Update:
 
 if __name__ == "__main__":
     Auto_Update()
-# afawffasff

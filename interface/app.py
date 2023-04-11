@@ -1,8 +1,7 @@
 import os
 from tkinter import *
-from var import config
 from interface.outset import outset
-
+from var import config
 
 class Start:
     def __init__(self):
@@ -27,9 +26,8 @@ class Start:
         height_plus = (self.height_screen//2 - self.win_height//2) 
         self.app.geometry(f"{self.win_width}x{self.win_height}+{width_plus}+{height_plus}")
         self.app.resizable(False, False)
-
         self.app.iconphoto(False, self.img_logo)
-        self.app.title(f"Fixation {config['Version']}")
+        self.app.title(f"Fixation")
         self.app.configure(background=config["Background-Color-APP"])
 
         self.nome = os.getlogin()
@@ -53,5 +51,3 @@ class Start:
 
         self.app.mainloop()
 
-if __name__ == '__main__':
-    Start()

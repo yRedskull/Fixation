@@ -4,7 +4,6 @@ from threading import Thread
 import os
 
 
-
 def Update_file(self, bag, fog, fts):
         cont = 0
         for file in self.files:
