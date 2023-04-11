@@ -1,11 +1,11 @@
 from urllib import request
 from tkinter import Button
 from threading import Thread
-import os
+import subprocess, os
 
 
 def Update_file(self, bag, fog, fts):
-        self.verficar.destroy()
+        self.verificar.destroy()
         
         cont = 0
         for file in self.files:
@@ -29,16 +29,17 @@ def Update_file(self, bag, fog, fts):
             cont += 1
         self.Varp.set(len(self.files))    
         self.upt.update()
-        self.restart = Button(self.upt, text="Reiniciar",command=lambda: Thread(target=Restart(self)), bg=bag, fg=fog,font=fts)
+        self.restart = Button(self.upt, text="Reiniciar",command=lambda: Thread(target=Restart(self)),
+                              bg=bag, fg=fog,font=fts, highlightthickness=0, bd=0)
         self.restart.pack(side="bottom", padx=2, pady=2, ipadx=10, ipady=3)
         self.upt.update()
     
 def Restart(self):
         self.upt.destroy()
         if os.path.exists('Fixation.exe'):
-            os.startfile('Fixation.exe')
+            subprocess.call('Fixation.exe', shell=True)
         else:
-            os.startfile('run.pyw')
+            subprocess.call('run.pyw', shell=True)
 
 if __name__ == "__main__":
-    os.startfile('auto_update.pyw')
+    subprocess.call('auto_update.pyw', shell=True)
