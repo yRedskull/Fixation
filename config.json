@@ -33,10 +33,11 @@
             "engine/del_folders.py",
             "engine/organize.py",
             "engine/reverse_organize.py",
+            "engine/update.py",
             "var.py",
-            "config.json",
-            "run.py",
-            "auto_update.py"
+            "config.json", 
+            "run.pyw",
+            "auto_update.pyw"
         ]
     }
 }

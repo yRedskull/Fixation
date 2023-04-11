@@ -1,12 +1,12 @@
-from interface.app import Start
-from auto_update import Auto_Update
 from var import *
+import os
+
 
 def Run():
     if on_config_json["Version"] != config["Version"]:
-        Auto_Update()
+        os.startfile('auto_update')
     else:
-        Start()
+        os.startfile('interface/app.pyw')
 
 if __name__ == '__main__':
     Run()

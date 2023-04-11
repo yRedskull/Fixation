@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter.ttk import Progressbar
 from var import on_config_json, config
 from threading import Thread
-from engine.update import Update_file, Restart
+from engine.update import Update_file
 
 
 class Auto_Update:
@@ -40,4 +40,6 @@ class Auto_Update:
         except Exception:
             pass
 
-        
+if __name__ == "__main__":
+    Auto_Update()
+# afawffasff

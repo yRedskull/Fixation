@@ -4,6 +4,7 @@ from threading import Thread
 import os
 
 
+
 def Update_file(self, bag, fog, fts):
         cont = 0
         for file in self.files:
@@ -36,4 +37,7 @@ def Restart(self):
         if os.path.exists('Fixation.exe'):
             os.startfile('Fixation.exe')
         else:
-            os.startfile('run.py')
+            os.startfile('run.pyw')
+
+if __name__ == "__main__":
+    os.startfile('auto_update.pyw')
