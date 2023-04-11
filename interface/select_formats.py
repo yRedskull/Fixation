@@ -36,12 +36,12 @@ def select_formats(self, bag, fog, fts, bg_app):
             self.formats = {
                 'Arquivos': ['Pastas e outros'],
                 'Documentos': ['*.pdf', '*.pptx', '*.txt', '*.cdr', '*.xml', '*.sql', '*.word', '*.doc', '*.docx',
-                               '*.rtf', '*.ppt', '*.pps', '*.xls', '*.xlsx', '*.html', '*.dwg'],
+                               '*.rtf', '*.ppt', '*.pps', '*.xls', '*.xlsx', '*.html', '*.dwg', '*.iss', '*.torrent'],
                 'Executáveis': ['*.exe', '*.msi', '*.bat', '*.bin', '*.app', '*.iso'],
                 'Imagens': ['*.jpeg', '*.jpg', '*.png', '*.gif', '*.jfif', '*.svg', '*.psd', '*.webp', '*.raw','*.tiff', '*.bmp', '*.cr2', '*.dng', '*.gpr', '*.nef'],
                 'Compactados': ['*.zip', '*.rar', '*.7z'],
                 'Áudios': ['*.mp3', '*.wma', '*.wav', '*.pcm', '*.flac', '*.m4a', '*.ogg'],
-                'Vídeos': ['*.mp4', '*.avi', '*.wmv', '*.mov', '*.flv', '*.f4v', '*.swf', '*.mkv', '*.mpeg-2', '*.m4v']
+                'Vídeos': ['*.mp4', '*.avi', '*.wmv', '*.mov', '*.flv', '*.f4v', '*.swf', '*.mkv', '*.mpeg-2', '*.m4v', '*.webm']
             }
 
             def cb_2_formats():
