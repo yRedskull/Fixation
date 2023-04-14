@@ -1,6 +1,7 @@
 # **Fixation**
 * **Organizador de diretório com interface gráfica**
 * **Baixe a `versão` mais atualizada do [`Fixation`](https://github.com/yRedskull/Fixation/releases)**
+* **Veja como funciona o software [aqui](https://yredskull.github.io/Fixation/view/)**
 
 ## **Features:**
 * **📋 Organiza qualquer diretório criando pastas com cada tipo de formatos escolhido**
