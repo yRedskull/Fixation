@@ -34,10 +34,10 @@
             "engine/organize.py",
             "engine/reverse_organize.py",
             "engine/update.py",
-            "var.py",
-            "config.json", 
-            "run.pyw",
-            "auto_update.pyw"
+            "var.py", 
+            "run.py",
+            "auto_update.pyw",
+            "config.json"
         ]
     }
 }
