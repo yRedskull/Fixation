@@ -4,7 +4,7 @@
 * **Veja como funciona o software [aqui](https://yredskull.github.io/Fixation/view/)**
 
 ## **Features:**
-* **📋 Organiza qualquer diretório criando pastas com cada tipo de formatos escolhido**
+* **📋 Organiza qualquer diretório, criando pastas com cada tipo de formatos escolhido**
 * **🕵🏽‍♂️ Fique tranquilo, pois o `Fixation` tem um sistema de reversão caso deseje reverter**
 * **🔒 Segurança em primeiro lugar, nenhum dos seus dados é armazenado para um ambiente externo**
 
