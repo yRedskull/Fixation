@@ -47,7 +47,7 @@ main img {
 }
 main img:hover {
         box-shadow: 0px 3px 20px var(--color-pink);
-    }
+}
 
 main a {
     background-color: var(--color-black);
