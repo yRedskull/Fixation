@@ -39,7 +39,7 @@ def Update_file(self, bag, fog, fts):
             return event
         
         self.restart = Button(self.upt, text="Reiniciar",command=lambda: Restart(self),
-                              bg=bag, fg=fog,font=fts, highlightthickness=0, bd=0)
+                              bg=bag, fg=fog,font=fts, highlightthickness=0, bd=1)
         self.restart.pack(side="bottom", padx=2, pady=2, ipadx=10, ipady=3)
         self.restart.bind("<Enter>", configbgcolor)
         self.restart.bind("<Leave>", configbgbag)
