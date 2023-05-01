@@ -42,7 +42,7 @@ class Auto_Update:
                 self.verificar.config(bg=bag)
                 return event
             
-            self.verificar = Button(self.upt, text="Atualizar",command=lambda: Thread(target=lambda: Update_file(self, bag, fog, fts)).start(),
+            self.verificar = Button(self.upt, text="Atualizar",command=lambda: Thread(target=lambda: Update_file(self, bag, fog, fts, bg_app=config["Background-Color-APP"])).start(),
                                      bg=bag, fg=fog,font=fts, highlightthickness=0, border=0)
             self.verificar.pack(side="bottom", padx=4, pady=4, ipadx=10, ipady=3)
             self.verificar.bind("<Enter>", configbgcolor)
