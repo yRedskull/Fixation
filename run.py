@@ -1,11 +1,12 @@
 from var import *
 from interface.app import Start
-import subprocess
+from auto_update import Auto_Update
+
 
 
 def Run():
     if on_config_json["Version"] != config["Version"]:
-        subprocess.call("auto_update.pyw", shell=True)
+        Auto_Update()
     else:
         Start()
 
