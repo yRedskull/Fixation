@@ -1,5 +1,5 @@
 {
-    "Version": "1.11",
+    "Version": "1.15",
     "Background-Color-APP": "#222",
     "Background-Color" : "#292929",
     "Foreground-Color" : "#DE6F1B",
@@ -36,7 +36,7 @@
             "engine/update.py",
             "var.py", 
             "run.py",
-            "auto_update.pyw",
+            "auto_update.py",
             "config.json"
         ]
     }
