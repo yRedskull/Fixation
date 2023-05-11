@@ -36,8 +36,8 @@
             "engine/update.py",
             "var.py", 
             "run.py",
-            "auto_update.py",
-            "config.json"
+            "config.json",
+            "auto_update.py"
         ]
     }
 }
