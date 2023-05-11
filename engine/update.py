@@ -1,7 +1,7 @@
 from urllib import request
 from tkinter import Button
 from interface.app import Start
-import subprocess, os
+import os
 
 
 def Update_progress(self, bag, fog, fts):
@@ -11,8 +11,8 @@ def Update_progress(self, bag, fog, fts):
     for file in self.files:
         self.Varp.set(cont)
         try:        
-            Update(self)
-        except:
+            Update(self, file)
+        except Exception:
             cont += 1
             continue
         self.upt.update()
@@ -50,10 +50,5 @@ def Update(self, file):
     
 def Restart(self):
     self.upt.destroy()
-
-    if os.path.exists('Fixation.exe'):
-        self.restart_val = True
-        subprocess.call('Fixation.exe', shell=True)
-    else:
-        self.restart_val = True
-        Start()
+    self.restart_val = True
+    Start()
