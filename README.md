@@ -1,5 +1,7 @@
-# **Fixation**
-* **Organizador de diretório com interface gráfica**
+<h1 style="font-weight:800;">Fixation</h1>
+<img src="https://pbs.twimg.com/media/FwW0MQ5XwAICWsy?format=png&name=900x900" alt="Fixation" width="500" height="380">
+
+
 * **Baixe a `versão` mais atualizada do [`Fixation`](https://github.com/yRedskull/Fixation/releases)**
 * **Veja como funciona o software [aqui](https://yredskull.github.io/Fixation/view/)**
 
