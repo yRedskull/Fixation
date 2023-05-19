@@ -63,7 +63,6 @@ article a {
 
 
 
-
 .Fixation {
     font-family: Arial, Helvetica, sans-serif;
     color: var(--color-orange);
@@ -77,7 +76,7 @@ article a {
     background-color: var(--color-black);
     font-size: 1.5em;
     color: var(--color-orange);
-    text-align: center;
+    text-align: justify;
     padding: 20px;
     margin: 20px;
     border-radius: 20px;
@@ -103,12 +102,13 @@ article a {
     min-width: auto;
     max-width: auto;
     min-height: auto;
-    border-radius: 20px;
 }
 
 .video iframe {
     width: 100%;
     background-color: var(--color-black);
+
+    border-radius: 20px;
 
     animation-name: light-r;
     animation-iteration-count: infinite;
