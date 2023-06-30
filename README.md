@@ -1,34 +1,28 @@
-<h1 style="font-weight:800;">Fixation</h1>
-<img src="https://pbs.twimg.com/media/FwW0MQ5XwAICWsy?format=png&name=900x900" alt="Fixation" width="500" height="380">
-
-
-* **Baixe a `versão` mais atualizada do [`Fixation`](https://github.com/yRedskull/Fixation/releases)**
-* **Veja como funciona o software [aqui](https://yredskull.github.io/Fixation/view/)**
+* **Download the most up to date `version` of [`fixation`](https://github.com/yrededskull/fixation/releases)**
+* **See how software works [here](https://yrededskull.github.io/fixation/view/)**
 
 ## **Features:**
-* **📋 Organiza qualquer diretório, criando pastas com cada tipo de formatos escolhido**
-* **🕵🏽‍♂️ Fique tranquilo, pois o `Fixation` tem um sistema de reversão caso deseje reverter**
-* **🔒 Segurança em primeiro lugar, nenhum dos seus dados é armazenado para um ambiente externo**
+* **📋 Organizes any directory, creating folders with each type of formats chosen**
+* **🕵🏽‍♂️ Rest assured, because `fixation` has a reversal system if you want to reverse**
+* **🔒 Security First, none of your data is stored for an external environment**
 
+## **Instructions:**
 
+### **1. Install 🐍 `python` on your machine, through [this link](https://www.python.org/)**
 
-## **Instruções:**
+### **2. Make a clone [of this repository](https://github.com/yrededskull/fixation.git) on your machine:**
 
-### **1. Instale 🐍`Python` na sua máquina, por meio [deste link](https://www.python.org/)**
+* Create a folder on your computer for this program, I recommend putting the name ** Fixation** <br>
+* **Open `Git Bash` or` Terminal` Within this folder <br>**
+* Copy a [URL] (https://github.com/yrededskull/fixation.git)
+* Enter `git clone <copy>` and press `enter` <br>
+* **You can also access by [Github Desktop](https://desktop.github.com/) <br>**
+* Open your `Github desktop` <br>
+* Click `File` in the upper left corner <br>
+* Select the `clone repository ...` and go to the tab `URL` <br>
+* Paste the repository, indicate the folder where it should appear and click `clone` <br>
 
-### **2. Faça um clone [desse repositório](https://github.com/yRedskull/Fixation.git) na sua máquina:**
-
-* Crie uma pasta no seu computador para esse programa, recomendo colocar o nome **Fixation**<br>
-* **Abra o `git bash` ou `terminal` dentro dessa pasta<br>**
-* Copie a [URL](https://github.com/yRedskull/Fixation.git) do repositório<br>
-* Digite `git clone <URL copiada>` e pressione `enter`<br>
-* **Também pode acessar pelo [GitHub Desktop](https://desktop.github.com/)<br>**
-* Abra seu `GitHub Desktop`<br>
-* Clique em `file` no canto superior esquerdo<br>
-* Selecione a opção `Clone repository...` e vá na aba `URL`<br>
-* Cole o repositório, indique a pasta onde ele deverá aparecer e clique em `Clone`<br>
-
-### **3. Execução 🦈**
-* **Entre na pasta onde o repositório foi clonado**
-* Execute o arquivo `run.py` com dois cliques
-* Siga as intruções nele
+### **3. Execution 🦈**
+* **Enter the folder where the repository was cloned**
+* Run the `Run.py` file with two clicks
+* Follow the instructions in it
