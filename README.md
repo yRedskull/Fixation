@@ -14,8 +14,10 @@
 
 * Create a folder on your computer for this program, I recommend putting the name ** Fixation** <br>
 * **Open `Git Bash` or` Terminal` Within this folder <br>**
-* Copy the [URL] (https://github.com/yrededskull/fixation.git)
-* Enter `Git Clone <copy>` and press `Enter` <br>
+* Type
+```
+git clone https://github.com/yrededskull/fixation.git
+```  
 * **You can also access by [Github Desktop](https://desktop.github.com/) <br>**
 * Open your `Github desktop` <br>
 * Click `File` in the upper left corner <br>
